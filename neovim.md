@@ -1,6 +1,6 @@
 Here’s a structured table for the shortcuts and configurations, followed by all complementary configurations in one file for easy setup.
 
-### **Shortcuts Table**
+## **Shortcuts Table**
 
 | **Action**                   | **Shortcut**            | **Description**                                                        |
 |------------------------------|-------------------------|------------------------------------------------------------------------|
@@ -61,7 +61,7 @@ Here’s a structured table for the shortcuts and configurations, followed by al
 | Next location list item       | `:lnext`                | Jumps to the next item in the location list                            |
 | Previous location list item   | `:lprev`                | Jumps to the previous item in the location list                        |
 
-### **Complete Configuration File**
+## **Complete Configuration File**
 
 ```lua
 -- Enable line numbers and relative line numbers for easier navigation

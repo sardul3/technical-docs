@@ -1,6 +1,6 @@
 To SSH from your Mac to your Linux machine, you’ll need to ensure both machines are set up properly for SSH communication. Here’s a step-by-step guide for setting everything up from scratch:
 
-### On Linux (Mini PC):
+## On Linux (Mini PC):
 
 1. **Install SSH Server**:
    If SSH is not already installed on your Linux machine, you’ll need to install the OpenSSH server. To do this:
@@ -32,7 +32,7 @@ To SSH from your Mac to your Linux machine, you’ll need to ensure both machine
       ```
    3. Look for the section related to your active network interface (e.g., `eth0` for wired or `wlan0` for Wi-Fi) and find the IP address (something like `192.168.x.x`).
 
-### On Mac:
+## On Mac:
 
 1. **Install OpenSSH (if not already installed)**:
    Most modern macOS systems come with OpenSSH pre-installed, but you can check if it's installed by running:
@@ -74,7 +74,7 @@ To SSH from your Mac to your Linux machine, you’ll need to ensure both machine
       ssh user@192.168.x.x
       ```
 
-### Troubleshooting:
+## Troubleshooting:
 
 - Ensure both machines are on the same network.
 - If the connection fails, check the firewall settings on your Linux machine:
@@ -83,10 +83,10 @@ To SSH from your Mac to your Linux machine, you’ll need to ensure both machine
   sudo ufw enable
   ```
 
-### Details on Public Key Copy from host to remote
+## Details on Public Key Copy from host to remote
 After generating the SSH key on your Mac, you need to copy the public key to your Linux machine. This allows you to log into the Linux machine without entering a password each time, enabling key-based authentication. Below are the detailed steps:
 
-### 1. **Generate the SSH Key on Your Mac** (if you haven’t done it already)
+## 1. **Generate the SSH Key on Your Mac** (if you haven’t done it already)
 If you haven’t generated an SSH key, do it with the following command:
 
 ```bash
@@ -97,7 +97,7 @@ ssh-keygen -t rsa
 - You will be prompted to enter a location to save the key. Press **Enter** to save it in the default location: `~/.ssh/id_rsa`.
 - You may also be asked to provide a passphrase for extra security. If you don't want a passphrase, just press **Enter** to leave it blank.
 
-### 2. **View the Generated Public Key**
+## 2. **View the Generated Public Key**
 You’ll now have two files in the `~/.ssh/` directory:
 - `id_rsa` (your private key)
 - `id_rsa.pub` (your public key)
@@ -108,7 +108,7 @@ To confirm the public key, you can view it with:
 cat ~/.ssh/id_rsa.pub
 ```
 
-### 3. **Copy the SSH Key to Your Linux Machine**
+## 3. **Copy the SSH Key to Your Linux Machine**
 The next step is to copy the public key to your Linux machine. This is where the `ssh-copy-id` command is used.
 
 1. **Make sure SSH is running** on your Linux machine and you have its IP address and username ready.
@@ -133,7 +133,7 @@ The next step is to copy the public key to your Linux machine. This is where the
    - You will be asked to enter the password for the Linux user account you are copying the SSH key to. This is necessary just for the first time to authorize the key copy.
    - Once the password is entered, `ssh-copy-id` will automatically add your public key to the Linux machine’s `~/.ssh/authorized_keys` file.
 
-### 4. **Verify SSH Key-Based Authentication**
+## 4. **Verify SSH Key-Based Authentication**
 Now that the public key has been copied to the Linux machine, you can log in without needing a password.
 
 1. From your Mac, try SSHing into the Linux machine again:
@@ -143,7 +143,7 @@ Now that the public key has been copied to the Linux machine, you can log in wit
    
 2. This time, you should be logged in without being prompted for a password.
 
-### 5. **(Optional) Disable Password Authentication** on the Linux Machine
+## 5. **(Optional) Disable Password Authentication** on the Linux Machine
 For extra security, you may want to disable password-based SSH logins, ensuring only SSH keys can be used.
 
 1. On the Linux machine, open the SSH configuration file for editing:
@@ -165,7 +165,7 @@ For extra security, you may want to disable password-based SSH logins, ensuring 
 
 Now, only key-based logins will be allowed, adding an extra layer of security.
 
-### Troubleshooting
+## Troubleshooting
 - **Permission issues**: Ensure the `~/.ssh/authorized_keys` file on the Linux machine has the correct permissions. Use:
   ```bash
   chmod 600 ~/.ssh/authorized_keys
@@ -178,13 +178,13 @@ Now, only key-based logins will be allowed, adding an extra layer of security.
 
 That’s it! You’ve now set up passwordless SSH login using key-based authentication.
 
-### Using **NetworkManager** to manage network connections
+## Using **NetworkManager** to manage network connections
 
 It is best to assign a static IP through NetworkManager directly rather than manually editing Netplan files.
 
 Here's how you can assign a static IP using **NetworkManager**:
 
-### Method 1: Using `nmtui` (Text User Interface)
+## Method 1: Using `nmtui` (Text User Interface)
 
 1. **Open the Terminal** on your Linux machine.
    
@@ -223,7 +223,7 @@ Here's how you can assign a static IP using **NetworkManager**:
    ip a
    ```
 
-### Method 2: Using `nmcli` (Command Line Interface)
+## Method 2: Using `nmcli` (Command Line Interface)
 
 If you prefer to work entirely in the command line, you can use the `nmcli` command to set a static IP address.
 
@@ -257,14 +257,14 @@ If you prefer to work entirely in the command line, you can use the `nmcli` comm
 
 If everything is configured correctly, your Linux machine should now use a static IP address over Wi-Fi. Let me know if you encounter any issues!
 
-### Easy Access to Remote without typing IP everytime
+## Easy Access to Remote without typing IP everytime
 Updating the **`/etc/hosts`** file or the **SSH config (`~/.ssh/config`)** is useful if you frequently SSH into the same machine. These methods allow you to associate a **hostname** or a **shortcut name** with the IP address of your Linux machine, so you don’t need to remember or type the full IP address each time you SSH.
 
-### 1. **Update the `/etc/hosts` File**
+## 1. **Update the `/etc/hosts` File**
 
 The `/etc/hosts` file allows you to map a hostname (alias) to an IP address. This means you can type the hostname instead of the IP address when you SSH or access the machine.
 
-#### Steps:
+### Steps:
 
 1. **Open the Terminal** on your Mac.
 
@@ -295,11 +295,11 @@ The `/etc/hosts` file allows you to map a hostname (alias) to an IP address. Thi
 
    This way, even if you change the Linux machine's IP again, you can just update the `/etc/hosts` file with the new IP, and the alias (`linuxpc`) will still work.
 
-### 2. **Update the SSH Config File (`~/.ssh/config`)**
+## 2. **Update the SSH Config File (`~/.ssh/config`)**
 
 The SSH config file allows you to create shortcuts for SSH connections, where you can define specific settings for different hosts (like the IP address, username, port, etc.). This is very useful when you frequently SSH into multiple servers.
 
-#### Steps:
+### Steps:
 
 1. **Open the Terminal** on your Mac.
 
@@ -340,7 +340,7 @@ The SSH config file allows you to create shortcuts for SSH connections, where yo
 
    - This will automatically use the IP (`192.168.1.100`) and username you specified in the `~/.ssh/config` file.
 
-#### Example of Multiple Hosts in SSH Config:
+### Example of Multiple Hosts in SSH Config:
 If you connect to multiple servers, you can add multiple entries in your `~/.ssh/config` file, like so:
 ```plaintext
 Host linuxpc
@@ -358,19 +358,19 @@ Host workserver
   ssh workserver
   ```
 
-### Summary:
+## Summary:
 - **Updating `/etc/hosts`** allows you to map a custom hostname (alias) to the IP address, so you can use the alias instead of the IP when connecting via SSH or accessing the machine on the network.
 - **Updating `~/.ssh/config`** allows you to create SSH shortcuts and store specific settings like username, IP address, and port, making it easier to SSH into frequently accessed machines.
 
 These methods save you time and prevent you from having to remember or type IP addresses repeatedly.
 
 
-### Save Passphrase to Mac KeyChain for easy access
+## Save Passphrase to Mac KeyChain for easy access
 You can save the passphrase for your SSH key to avoid entering it every time you use the key for authentication. The most common way to achieve this is by using an **SSH agent**, which stores your passphrase in memory for the duration of your session.
 
 Here’s how you can set this up on macOS:
 
-### 1. **Start the SSH Agent**
+## 1. **Start the SSH Agent**
    The SSH agent is usually started by default on macOS, but you can ensure it’s running by starting it manually.
 
    Open your terminal and run:
@@ -380,7 +380,7 @@ Here’s how you can set this up on macOS:
 
    This will start the SSH agent and return the process ID (PID), indicating that it's running.
 
-### 2. **Add Your SSH Private Key to the Agent**
+## 2. **Add Your SSH Private Key to the Agent**
    Once the SSH agent is running, you need to add your private key to it. This allows the agent to cache the key and manage the passphrase for you.
 
    To add your private key:
@@ -392,7 +392,7 @@ Here’s how you can set this up on macOS:
 
    You will be prompted to enter your passphrase one last time. After that, the agent will store the passphrase for the duration of your session, so you won’t have to enter it again.
 
-### 3. **Configure SSH to Automatically Use the Agent**
+## 3. **Configure SSH to Automatically Use the Agent**
 
    To make the SSH agent automatically load your key when the system starts, you can modify or create a configuration file:
 
@@ -415,7 +415,7 @@ Here’s how you can set this up on macOS:
 
    3. **Save and close the file** by pressing **Ctrl + O** to save and **Ctrl + X** to exit.
 
-### 4. **Store the Passphrase in macOS Keychain**
+## 4. **Store the Passphrase in macOS Keychain**
    macOS allows you to store your SSH key passphrase in the Keychain, so you don’t need to enter it again after rebooting. You can do this by using the `ssh-add` command with the `-K` option (on older macOS versions) or simply by following the steps above (`UseKeychain yes`).
 
    To store the passphrase in the macOS Keychain:
@@ -427,7 +427,7 @@ Here’s how you can set this up on macOS:
 
    On **macOS Monterey (12.x)** and later, `ssh-add` automatically uses the Keychain without needing the `-K` option.
 
-### 5. **Verify SSH Key is Loaded**
+## 5. **Verify SSH Key is Loaded**
 
    To check that your key has been successfully added to the agent, run:
    ```bash
@@ -436,7 +436,7 @@ Here’s how you can set this up on macOS:
 
    This will list the keys currently loaded in the SSH agent. You should see your key listed here.
 
-### 6. **Restarting the SSH Agent Automatically**
+## 6. **Restarting the SSH Agent Automatically**
 
    To ensure your keys are automatically loaded into the SSH agent on system startup, you can add the following to your shell’s configuration file (`.bash_profile`, `.zshrc`, etc.):
 

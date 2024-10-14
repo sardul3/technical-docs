@@ -2,7 +2,7 @@
 
 Here’s a **checklist** of **DOs and DON'Ts** when working with Temporal in a Spring Boot application, specifically focusing on code practices to follow:
 
-### **DOs**
+## **DOs**
 
 #### 1. **DO Use Temporal's Workflow Time API**
    - **Use `Workflow.currentTimeMillis()` or `Workflow.currentDateTime()`** instead of `System.currentTimeMillis()` or `LocalDateTime.now()`. This ensures deterministic behavior in workflows.
@@ -121,7 +121,7 @@ Here’s a **checklist** of **DOs and DON'Ts** when working with Temporal in a S
 
 ---
 
-### **DON'Ts**
+## **DON'Ts**
 
 #### 1. **DON’T Use Non-Deterministic APIs in Workflows**
    - Avoid using APIs like `System.currentTimeMillis()`, `Math.random()`, `Thread.sleep()`, or any form of system interaction in workflow code.
@@ -187,9 +187,11 @@ Here’s a **checklist** of **DOs and DON'Ts** when working with Temporal in a S
 
 ---
 
-### **Conclusion:**
+## **Conclusion:**
 Following these **DOs and DON'Ts** ensures that your Temporal workflows and activities remain deterministic, scalable, and maintainable within a **Spring Boot** environment. By leveraging Temporal’s features and best practices, you can build highly reliable distributed systems that are easier to manage and debug.
 
+
+## Durable Execution with Temporal Replay
 
 **Step-by-Step Workflow Execution**
 - The workflow execution begins by combining code from the workflow definition with an input request (e.g., customer details and pizza order).
@@ -207,12 +209,12 @@ Following these **DOs and DON'Ts** ensures that your Temporal workflows and acti
 - Temporal's workflow replay mechanism relies on event history to restore variable states, meaning the workflow can resume execution as if the crash never occurred.
 - Temporal ensures workflows are deterministic by suppressing duplicated log outputs during replay, eliminating any discrepancies.
   
-**Conclusion: Durable Execution with Temporal Replay**
+**Conclusion**
 - The replay mechanism guarantees that workflows maintain the same state before and after a crash.
 - Temporal logs the final "workflow execution completed" event, ensuring durable execution.
 
 
-Here is a structured summary of the video "Understanding Temporal Workflow Determinism":
+## Understanding Temporal Workflow Determinism
 
 **Introduction to Workflow Determinism**
 - what it means for Temporal workflow code to be deterministic and why this is crucial for Temporal's operations?
@@ -231,7 +233,7 @@ Here is a structured summary of the video "Understanding Temporal Workflow Deter
 - In one execution, the random number generates "84," leading to the next line being executed. However, during replay, the random number generates "14," causing a different path to be taken.
 - This mismatch in the sequence of commands results in a non-deterministic error, as the worker cannot align the commands with the event history.
 
-**Conclusion: Importance of Determinism**
+## Importance of Determinism
 - For Temporal to guarantee durable workflow execution, the workflow must always produce the same sequence of commands for a given input.
 - Non-determinism, such as using random values, can disrupt this process and cause errors during workflow recovery.
 
@@ -247,50 +249,49 @@ Here is a structured summary of the video "Understanding Temporal Workflow Deter
 - Modifying code inside of an Activity Definition
 
 
-Here's a summary of the key points from the content you provided:
 
-### Overview of Temporal:
+## Overview of Temporal
 - **Temporal**: Open-source durable execution system for scalable and reliable applications.
 - **Key Features**: Supports recovery from crashes, state reconstruction using History Replay, and deterministic Workflow execution.
 
-### Temporal Applications:
+## Temporal Applications
 - **Workflow and Activity Definitions**: Code representing business logic, while SDK components manage Workers and Clients.
 - **Automatic Recovery**: Temporal automatically reconstructs state after failures using History Replay.
 
-### Best Practices for Temporal Development:
+## Best Practices for Temporal Development
 1. Use a single class for input/output parameters in Workflows and Activities for backward compatibility.
 2. Avoid large data for inputs/outputs due to Temporal event size limits.
 3. Ensure deterministic Workflow code (e.g., use `Workflow.sleep` instead of `Thread.sleep`).
 4. Activities can fail and be retried; Workflows should fail less often.
 5. Use Temporal's logging API to avoid duplicate logs during History Replay.
    
-### Testing Temporal Applications:
+## Testing Temporal Applications
 - **Automated Testing**: Use `io.temporal.testing` for unit tests, JUnit, Mockito, and time-skipping for Workflow tests.
 - **Replaying Previous Executions**: Test compatibility of Workflow modifications by replaying past executions.
 
-### Workflow Execution:
+## Workflow Execution
 - **Unique Workflow ID**: Ensure unique Workflow IDs across all Workflow Executions in the same namespace.
 - **Open and Closed States**: Workflow starts in an open state and can close as Completed, Failed, Canceled, Terminated, etc.
 - **Sticky Execution**: Optimizes execution by favoring the same Worker for multiple tasks.
 - **Continue-As-New**: Used to split Workflow Execution to keep Event History manageable.
 
-### Event History:
+## Event History
 - Logs all Workflow events with timestamps and attributes, up to a 50K event limit. 
 - **Retention Period**: Workflow history is retained post-execution for a set period.
 
-### Building and Running Temporal Applications:
+## Building and Running Temporal Applications
 - **No Specific Tools**: Applications can be built and deployed using tools like Maven, CI/CD pipelines, and Docker/Kubernetes.
 - **Production Setup**: Deploy multiple instances for scalability and availability.
 
-### Temporal Cluster Components:
+## Temporal Cluster Components
 - **Temporal Cluster**: Consists of services like History, Matching, and Worker Services, using gRPC for communication.
 - **Temporal Cloud**: Managed service alternative to self-hosting.
 
-### Deploying to Production:
+## Deploying to Production
 - **Frontend Service**: Clients connect via TCP (default port 7233).
 - **Safe Activity Changes**: Activities can be modified freely, but Workflow changes require compatibility testing.
 
-### Signals in Temporal
+## Signals in Temporal
 
 - **Signals**: Asynchronous messages used to change the state or control the flow of a running Workflow Execution.
 - **Usage**: Suitable for workflows that need to react to external events, such as human task completions or user interactions.
@@ -299,11 +300,11 @@ Here's a summary of the key points from the content you provided:
   - Confirming payment to proceed with shipping.
   - Handling frequently changing data like stock prices.
 
-### DynamicSignalHandler
+## DynamicSignalHandler
 - **Purpose**: Handles unregistered or unexpected Signals in a workflow.
 - **Usage**: Register a handler for undefined Signals using `Workflow.registerListener()`.
 
-### When to Throw Exceptions in Temporal Workflows
+## When to Throw Exceptions in Temporal Workflows
 - **Throw Exceptions**:
   - For non-recoverable errors (e.g., invalid inputs).
   - Explicit workflow cancellation (e.g., user cancellation).
@@ -314,16 +315,16 @@ Here's a summary of the key points from the content you provided:
   - For expected conditions (use conditional logic).
   - During graceful cancellations (use signals, not exceptions).
   
-### Signal-With-Start
+## Signal-With-Start
 - **Feature**: Sends a signal to a Workflow and starts it if it is not running.
 - **Usage**: Useful to ensure workflow execution when signaling.
 
-### Common Signal Issues
+## Common Signal Issues
 - **Outgoing Signal Limit**: 2000 pending outgoing Signals per Workflow.
 - **Receiving Signal Limit**: 10,000 Signals per Workflow; 51,200 event history limit.
 - **Handling High Signal Volume**: Use batching to avoid UnhandledCommand errors or performance degradation.
 
-### Summary of Cancellation Scopes in Temporal Java SDK
+## Summary of Cancellation Scopes in Temporal Java SDK
 
 A **Cancellation Scope** in the Temporal Java SDK allows workflows to handle cancellation requests in a controlled manner. Each part of a workflow can be run inside its own cancellation scope, which can be canceled independently of other parts. Cancellation scopes help manage cleanup, timeouts, and resource management when a workflow or its activities are canceled.
 
@@ -422,7 +423,7 @@ public String orderProcessingWorkflow(String name) {
 
 By understanding and applying these patterns, you can handle workflow and activity cancellations gracefully in Temporal, ensuring efficient resource management and clean shutdowns.
 
-### Summary of Asynchronous Activity Completion in Temporal
+## Asynchronous Activity Completion in Temporal
 
 Asynchronous Activity Completion in Temporal allows an Activity to return without marking it as complete, enabling external systems to interact with Temporal before the activity is considered finished. This is particularly useful when an Activity involves long-running tasks or external dependencies, such as waiting for user input or handling operations on an external system.
 
@@ -495,7 +496,7 @@ public class ExternalUploadCompletionService {
 }
 ```
 
-#### Steps to Complete an Asynchronous Activity:
+## Steps to Complete an Asynchronous Activity:
 
 1. **Provide Task Token**: The `ActivityExecutionContext` provides a task token, which is passed to the external service to later mark the activity as complete.
    
@@ -900,7 +901,7 @@ public class PaymentClient {
 
 ---
 
-### **Best Practices Applied**:
+## **Best Practices Applied**:
 
 - **Graceful Cancellation**: By wrapping the critical `chargeCustomer` operation in a `CancellationScope`, we can ensure that if the operation is canceled, the workflow handles it gracefully and performs any necessary cleanup.
 - **Asynchronous Activities**: The activities are kept short and simple, following the best practice of delegating longer operations to external services.

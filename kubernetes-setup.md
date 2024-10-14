@@ -1,3 +1,4 @@
+
 Setting up a Kubernetes (K8s) cluster as a beginner can feel daunting, but breaking it down step by step makes it much more manageable. I’ll provide detailed explanations, alternatives, and reasons for each tool and choice. We’ll cover:
 
 1. **Understanding Kubernetes basics**
@@ -12,7 +13,7 @@ Let’s dive in.
 
 ---
 
-### 1. **Understanding Kubernetes Basics**
+##  **Understanding Kubernetes Basics**
 Kubernetes is a platform that automates the management of containerized applications across a cluster of machines (nodes). There are two main types of nodes:
 - **Control Plane (Master):** Manages the overall cluster (scheduling, scaling, networking, etc.)
 - **Worker Nodes:** Run the actual workloads (containers/apps) and are controlled by the Control Plane.
@@ -25,7 +26,7 @@ Kubernetes is a platform that automates the management of containerized applicat
 
 ---
 
-### 2. **Setting up the Kubernetes Cluster using `kubeadm`**
+##  **Setting up the Kubernetes Cluster using `kubeadm`**
 
 #### a. **Prerequisites**
 
@@ -41,7 +42,7 @@ Kubernetes is a platform that automates the management of containerized applicat
      sudo systemctl start docker
      ```
 
-#### b. **Installing Kubernetes Components (`kubeadm`, `kubelet`, `kubectl`)**
+##  **Installing Kubernetes Components (`kubeadm`, `kubelet`, `kubectl`)**
 
 1. **Add Kubernetes repository:**
    Run these commands on all three nodes (N1, N2, and N3):
@@ -73,7 +74,7 @@ Kubernetes is a platform that automates the management of containerized applicat
    - **kubelet**: The service that runs on all nodes, managing container workloads.
    - **kubectl**: A command-line tool to interact with the cluster.
 
-#### c. **Initialize Control Plane on N1**
+##  **Initialize Control Plane on N1**
 
 1. **Initialize the control plane on N1 (master node):**
    ```bash
@@ -92,7 +93,7 @@ Kubernetes is a platform that automates the management of containerized applicat
    **What’s happening?**  
    This configures `kubectl` (the Kubernetes command-line tool) to communicate with your new cluster from N1.
 
-#### d. **Join N2 and N3 as Worker Nodes**
+####  **Join N2 and N3 as Worker Nodes**
 
 1. **Generate a join command on N1:**
    ```bash
@@ -110,7 +111,7 @@ Kubernetes is a platform that automates the management of containerized applicat
 
 ---
 
-### 3. **Networking Setup (Pod Communication)**
+###  **Networking Setup (Pod Communication)**
 
 #### **Choose a Networking Plugin (CNI)**
 
@@ -131,7 +132,7 @@ This deploys Calico networking across all nodes.
 
 ---
 
-### 4. **Storage Setup**
+##  **Storage Setup**
 
 For persistent data (databases, files, etc.), Kubernetes uses **Persistent Volumes (PV)** and **Persistent Volume Claims (PVC)**. These can be backed by different storage solutions:
 
@@ -142,7 +143,7 @@ For persistent data (databases, files, etc.), Kubernetes uses **Persistent Volum
     - **Ceph**: Good for distributed storage but complex to set up.
     - **Longhorn**: Simplifies management, but MiniIO offers better object storage flexibility.
 
-#### a. **Set up NFS (on N3)**
+####  **Set up NFS (on N3)**
 
 1. **Install NFS server**:
    ```bash
@@ -167,7 +168,7 @@ For persistent data (databases, files, etc.), Kubernetes uses **Persistent Volum
    sudo systemctl restart nfs-kernel-server
    ```
 
-#### b. **Set up MiniIO (on N3)**
+####  **Set up MiniIO (on N3)**
 
 1. **Install MiniIO**:
    ```bash
@@ -179,7 +180,7 @@ For persistent data (databases, files, etc.), Kubernetes uses **Persistent Volum
    
 ---
 
-### 5. **Ingress Controller (For Exposing Apps)**
+##  **Ingress Controller (For Exposing Apps)**
 
 Kubernetes does not expose services to the internet by default. To expose apps, you need an **Ingress Controller**.
 
@@ -196,7 +197,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main
 
 ---
 
-### 6. **CI/CD Tools Setup**
+##  **CI/CD Tools Setup**
 
 - **Why Jenkins?**
   - Jenkins is widely used, with vast plugin support.
@@ -213,7 +214,7 @@ helm install jenkins jenkinsci/jenkins
 
 ---
 
-### 7. **Monitoring and Logging**
+##  **Monitoring and Logging**
 
 - **Why Prometheus and Grafana?**
   - **Prometheus**: Best tool for time-series monitoring.
@@ -230,7 +231,7 @@ helm install grafana grafana/grafana
 
 ---
 
-### 8. **Deploying a Simple App and Exposing it**
+##  **Deploying a Simple App and Exposing it**
 
 #### Deploy an Nginx App:
 ```bash
@@ -238,7 +239,7 @@ kubectl create deployment nginx --image=nginx
 kubectl expose deployment nginx --port=80 --type=NodePort
 ```
 
-#### Set Up Ingress for Your App:
+## Set Up Ingress for Your App:
 ```yaml
 
 
@@ -266,7 +267,7 @@ spec:
 
 ---
 
-### Summary and Tips:
+## Summary and Tips:
 
 - **Cluster Design Tips:**
   - Always keep the control plane on a dedicated node.

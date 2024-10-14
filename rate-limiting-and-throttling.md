@@ -2,25 +2,25 @@
 
 ---
 
-#### Objective
+### Objective
 To provide a robust, scalable, and production-ready rate limiting and throttling solution that can dynamically limit requests based on client IP, API key, or user. The RFC will outline both a naive implementation and a more sophisticated production-ready solution using the **Bucket4J** library and **Redis** for distributed token management. It will also discuss theoretical foundations, implementation steps, and how to scale the solution beyond IP-based limitations.
 
 ---
 
-### 1. Problem Statement
+##  Problem Statement
 Web services must control the rate at which clients can make requests to ensure system stability and prevent abuse. Without rate limiting, systems are vulnerable to performance degradation, security risks (DDoS attacks), and resource exhaustion.
 
 ---
 
-### **2. Theoretical Foundations: Rate Limiting and Token Buckets**
+## Theoretical Foundations: Rate Limiting and Token Buckets
 
-#### **Rate Limiting**:
+### **Rate Limiting**:
 Rate limiting restricts the number of requests a user, IP, or API key can make within a specific time window. The most common algorithms for rate limiting include:
 1. **Fixed Window Counter**: Allows a fixed number of requests in a time window (e.g., 100 requests in 1 minute).
 2. **Sliding Window Log**: Tracks individual requests and allows a fixed number of requests in a time window with more granular control.
 3. **Token Bucket Algorithm**: Allows bursts of traffic, refilling a set number of tokens into a bucket at a regular interval. Requests consume tokens, and once the bucket is empty, the requests are rate-limited.
 
-#### **Token Bucket Theory**:
+### **Token Bucket Theory**:
 - **Bucket Size**: Defines the maximum number of tokens that the bucket can hold.
 - **Token Refill Rate**: Defines how many tokens are added to the bucket per unit of time (e.g., 20 tokens per minute).
 - **Request Consumption**: Each request consumes a token. If the bucket is empty, the request is denied until tokens are refilled.
@@ -33,12 +33,12 @@ Example:
 
 ---
 
-### **3. Naive Solution: In-Memory Rate Limiting**
+##  Naive Solution: In-Memory Rate Limiting
 
-#### **Naive Implementation**:
+### **Naive Implementation**:
 A simple solution would store the request count for each client (based on IP address) in an in-memory map (`ConcurrentHashMap`). Each request increments the counter, and once the limit is reached, further requests are denied until a fixed time window elapses.
 
-#### **Code Example**:
+### **Code Example**:
 
 ```java
 import java.util.concurrent.ConcurrentHashMap;
@@ -63,7 +63,7 @@ public class NaiveRateLimiter {
 }
 ```
 
-#### **Naive Solution Drawbacks**:
+### **Naive Solution Drawbacks**:
 - **Memory Limitations**: In-memory storage is limited to a single instance, and data is lost if the instance restarts.
 - **No Scalability**: Cannot scale across multiple servers or instances (not suited for distributed systems).
 - **No Granularity**: Lacks flexibility in terms of API key or user-based limiting.
@@ -71,19 +71,19 @@ public class NaiveRateLimiter {
 
 ---
 
-### **4. Production-Ready Solution: Using Bucket4J and Redis**
+## Production-Ready Solution: Using Bucket4J and Redis
 
-#### **Bucket4J + Redis**:
+### **Bucket4J + Redis**:
 **Bucket4J** is a library that provides a token-bucket-based rate limiting implementation, and when integrated with **Redis**, it supports distributed rate limiting across multiple instances of an application.
 
-#### **How Bucket4J + Redis Works**:
+### **How Bucket4J + Redis Works**:
 1. **Bucket Configuration**: Define the bucket size and refill rate dynamically based on the API endpoint, HTTP method, or client attribute (IP, API key, or user).
 2. **Token Consumption**: Each request consumes one token from the bucket.
 3. **Redis Integration**: Redis stores the bucket state (remaining tokens, refill time), allowing multiple instances to share the same rate limit configuration.
 4. **Scalability**: Distributed systems can share rate-limiting states, ensuring consistency across instances.
 5. **Flexibility**: Rate limits can be set for different levels—IP-based, API key-based, or user-based.
 
-#### **Code Example**:
+### **Code Example**:
 
 ```java
 import io.github.bucket4j.Bucket;
@@ -125,7 +125,7 @@ public class Bucket4JRateLimiter {
 
 ---
 
-### **5. Expanding Beyond IP-Based Limiting**
+## Expanding Beyond IP-Based Limiting
 
 While the above solutions are IP-based, we can expand the system to work with **API keys** or **users**. This would involve:
 
@@ -133,7 +133,7 @@ While the above solutions are IP-based, we can expand the system to work with **
 - **Generating the Key**: Instead of using `clientIp`, generate the Redis key based on the API key or user ID, i.e., `"rate_limit:" + apiKey + ":" + endpoint + ":" + httpMethod` or `"rate_limit:" + userId + ":" + endpoint + ":" + httpMethod`.
 - **Flexible Configurations**: Different limits can be applied based on the type of user or API key (e.g., free-tier vs. premium users).
 
-#### **Code Example for API-Key-Based Limiting**:
+### **Code Example for API-Key-Based Limiting**:
 
 ```java
 public boolean isAllowed(String apiKey, String endpoint, String method) {
@@ -145,7 +145,7 @@ public boolean isAllowed(String apiKey, String endpoint, String method) {
 
 ---
 
-### **6. Decision Matrix: Comparing Naive vs. Bucket4J-based Solutions**
+##  Decision Matrix: Comparing Naive vs. Bucket4J-based Solutions
 
 | **Aspect**            | **Naive (In-Memory)**  | **Bucket4J + Redis**          |
 |-----------------------|------------------------|--------------------------------|
@@ -161,7 +161,7 @@ public boolean isAllowed(String apiKey, String endpoint, String method) {
 
 ---
 
-### **7. Steps to Make the Solution Robust and Production-Ready**
+## Steps to Make the Solution Robust and Production-Ready
 
 1. **Dynamic Rate Limits**: Allow rate limits to be configurable per endpoint, API key, and user level (e.g., tiered limits).
 2. **Logging and Monitoring**: Integrate comprehensive logging of rate limit hits and misses for analysis.
@@ -181,15 +181,15 @@ public boolean isAllowed(String apiKey, String endpoint, String method) {
 
 ---
 
-### **8. Checklist for Effective Rate Limiting and Throttling Implementation**
+##  Checklist for Effective Rate Limiting and Throttling Implementation
 
-#### **Starter**:
+### **Starter**:
 1. Implement naive in-memory rate limiting.
 2. Rate limit based on client IP.
 3. Return appropriate HTTP status codes (e.g., 429).
 4. Basic retry mechanism using headers (e.g., `Retry-After`).
 
-#### **Intermediate**:
+### **Intermediate**:
 1. Integrate Bucket4J for more efficient token bucket rate limiting.
 2. Use Redis for distributed rate-limiting state.
 3. Add API key and user-based rate limiting.
@@ -197,7 +197,7 @@ public boolean isAllowed(String apiKey, String endpoint, String method) {
 5. Set up monitoring for rate limit violations.
 6. Configure rate limits dynamically through `application.yml`.
 
-#### **Advanced**:
+### **Advanced**:
 1. Introduce dynamic rate limit configurations based on API, user, or service level.
 2. Provide monitoring and analytics for rate-limiting behavior using tools like Prometheus or Grafana.
 3. Implement multi-tiered rate limiting for different user levels (e.g., free vs. premium).
@@ -206,7 +206,7 @@ public boolean isAllowed(String apiKey, String endpoint, String method) {
 6. Provide rate-limiting exemptions for internal APIs or privileged users.
 7. Build a self-service configuration UI for API consumers to see rate limits and usage.
 
-### **9. Additional Advanced Points to Consider**:
+##  Additional Advanced Points to Consider
 1. **Dynamic Token Adjustment**: Create algorithms to dynamically adjust token limits based on real-time traffic.
 2. **Hybrid Limiting**: Combine API key and user-based rate limits with global rate limits.
 3. **Quotas**: Implement request quotas that reset daily, weekly, or monthly.
