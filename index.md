@@ -28,7 +28,7 @@ hero:
 features:
   - title: Caching and Filtering
     link: /caching-and-filtering
-    details: Learn how to efficiently cache data and filter requests to improve performance.
+    details: Learn how to efficiently cache data and filter requests to improve performance
 
   - title: eTags in APIs
     link: /eTags
