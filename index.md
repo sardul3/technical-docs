@@ -49,3 +49,12 @@ features:
   - title: Temporal with Spring Boot
     link: /temporal-with-springboot
     details: Step-by-step integration of Temporal workflows with Spring Boot.
+
+  - title: Spring Boot Camp
+    link: /spring-boot-camp
+    details: Step-by-step technical guide to master Spring Boot.
+
+---
+
+<!-- ## Testimonials -->
+<!-- <Testimonial /> -->

@@ -14,6 +14,12 @@ export default {
       ],
       sidebar: [
         {
+          text: 'Bootcamp',
+          items: [
+            { text: 'Intro to API', link: '/intro-to-api' },
+          ]
+        },
+        {
           text: 'Rest API',
           items: [
             { text: 'Idempotency', link: '/idempotency' },
