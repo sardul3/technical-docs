@@ -441,9 +441,9 @@ Asynchronous Activity Completion in Temporal allows an Activity to return withou
 
 #### Example Code: Asynchronous Activity Completion
 
-##### Activity Implementation
+::: code-group
 
-```java
+```java [Activity Implementation]
 import io.temporal.activity.Activity;
 import io.temporal.activity.ActivityExecutionContext;
 
@@ -466,9 +466,7 @@ public class VideoProcessingActivityImpl implements VideoProcessingActivity {
 }
 ```
 
-##### External Completion Service
-
-```java
+```java [External Completion Service]
 import io.temporal.client.ActivityCompletionClient;
 import io.temporal.client.WorkflowClient;
 import io.temporal.serviceclient.WorkflowServiceStubs;
@@ -495,7 +493,7 @@ public class ExternalUploadCompletionService {
     }
 }
 ```
-
+:::
 ## Steps to Complete an Asynchronous Activity:
 
 1. **Provide Task Token**: The `ActivityExecutionContext` provides a task token, which is passed to the external service to later mark the activity as complete.
@@ -518,17 +516,15 @@ public class ExternalUploadCompletionService {
 
 Here's how to implement an asynchronous activity where progress updates are sent every 3 seconds, with a 10% increment in progress, completing the task at 100%.
 
-##### Activity Interface
 
-```java
+::: code-group
+```java [Activity Interface]
 public interface VideoProcessingActivity {
     String uploadVideo(String videoPath);
 }
 ```
 
-##### Activity Implementation
-
-```java
+```java [Activity Implementation]
 import io.temporal.activity.Activity;
 import io.temporal.activity.ActivityExecutionContext;
 import org.slf4j.Logger;
@@ -588,6 +584,7 @@ public class VideoProcessingActivityImpl implements VideoProcessingActivity {
     }
 }
 ```
+:::
 
 This implementation leverages:
 

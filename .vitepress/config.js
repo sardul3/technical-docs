@@ -1,5 +1,6 @@
 export default {
     title: 'Dev Docs',
+    head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
     description: 'Comprehensive developer documentation for REST APIs, Temporal, Kubernetes, and more.',
     lastUpdated: true,
     themeConfig: {
