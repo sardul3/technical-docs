@@ -5,6 +5,9 @@ export default {
     lastUpdated: true,
     themeConfig: {
       logo: '/logo.png',
+      head: [
+          ['meta', {property: 'google-site-verification', content: 'nsrpO5pPQPNLyq8-NFkQL4-frwYOaOhxfl54-7htVv0' }]
+      ],
       socialLinks: [
         { icon: 'github', link: 'https://github.com/sardul3' },
         { icon: 'linkedin', link: 'https://www.linkedin.com/in/sagar-poud/' }
