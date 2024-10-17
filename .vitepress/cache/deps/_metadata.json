@@ -1,52 +1,67 @@
 {
-  "hash": "94fce650",
+  "hash": "40c8df2f",
   "configHash": "c76a2dea",
-  "lockfileHash": "a5c78ef3",
-  "browserHash": "5bd75e46",
+  "lockfileHash": "917c6bd6",
+  "browserHash": "7a4be0b7",
   "optimized": {
     "vue": {
       "src": "../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "2e5de9af",
+      "fileHash": "db6ba2c4",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "d2be0c96",
+      "fileHash": "c86cc8e2",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
-      "src": "../../../node_modules/@vueuse/core/index.mjs",
+      "src": "../../../node_modules/vitepress/node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "4a9bc0ae",
+      "fileHash": "24c3c3ec",
       "needsInterop": false
     },
     "vitepress > @vueuse/integrations/useFocusTrap": {
       "src": "../../../node_modules/@vueuse/integrations/useFocusTrap.mjs",
       "file": "vitepress___@vueuse_integrations_useFocusTrap.js",
-      "fileHash": "d1da48b9",
+      "fileHash": "37ba09f9",
       "needsInterop": false
     },
     "vitepress > mark.js/src/vanilla.js": {
       "src": "../../../node_modules/mark.js/src/vanilla.js",
       "file": "vitepress___mark__js_src_vanilla__js.js",
-      "fileHash": "ce107df5",
+      "fileHash": "d15c8a0d",
       "needsInterop": false
     },
     "vitepress > minisearch": {
       "src": "../../../node_modules/minisearch/dist/es/index.js",
       "file": "vitepress___minisearch.js",
-      "fileHash": "d215467c",
+      "fileHash": "ff1eacc9",
+      "needsInterop": false
+    },
+    "highlight.js": {
+      "src": "../../../node_modules/highlight.js/es/index.js",
+      "file": "highlight__js.js",
+      "fileHash": "1048f8a0",
+      "needsInterop": false
+    },
+    "markdown-it": {
+      "src": "../../../node_modules/markdown-it/index.mjs",
+      "file": "markdown-it.js",
+      "fileHash": "ca1aa7a9",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-ZKS7ZPS7": {
-      "file": "chunk-ZKS7ZPS7.js"
+    "chunk-Z5MM7V3J": {
+      "file": "chunk-Z5MM7V3J.js"
     },
     "chunk-XYSSNQS4": {
       "file": "chunk-XYSSNQS4.js"
+    },
+    "chunk-G3PMV62Z": {
+      "file": "chunk-G3PMV62Z.js"
     }
   }
 }

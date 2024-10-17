@@ -52,6 +52,7 @@ export default {
         {
           text: 'Others',
           items: [
+            { text: 'Clean Code', link: '/clean-code' },
             { text: 'Neovim', link: '/neovim' },
             { text: 'SSH and Server Access', link: '/ssh-server-access' },
           ]
