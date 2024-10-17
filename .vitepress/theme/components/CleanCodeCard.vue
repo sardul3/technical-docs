@@ -79,8 +79,6 @@
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
-import hljs from 'highlight.js'; // Import highlight.js for code highlighting
-import 'highlight.js/styles/github.css'; // Optional: Import a highlight.js style
 import Spinner from './Spinner.vue';
 import MarkdownIt from 'markdown-it';
 
