@@ -33,29 +33,41 @@
       return {
         isSpeaking: false,
         isPaused: false,
-        speechSynthesis: window.speechSynthesis,
+        speechSynthesis: null, // Initialize as null
         utterance: null,
         voicesLoaded: false, // To track if voices are loaded
       };
     },
     mounted() {
-      // Ensure voices are loaded before we start speech synthesis
-      this.loadVoices();
-      window.speechSynthesis.onvoiceschanged = this.loadVoices;
+      // Only run in browser environment
+      if (typeof window !== 'undefined') {
+        // Ensure voices are loaded before we start speech synthesis
+        this.speechSynthesis = window.speechSynthesis;
+        this.loadVoices();
+        window.speechSynthesis.onvoiceschanged = this.loadVoices;
+      }
     },
     beforeUnmount() {
-    // Cancel speech when the component is about to be destroyed (page change)
-    this.resetSpeechProgress();
-  },
+      // Cancel speech when the component is about to be destroyed (page change)
+      if (typeof window !== 'undefined') {
+        this.resetSpeechProgress();
+      }
+    },
     methods: {
       loadVoices() {
-        const voices = this.speechSynthesis.getVoices();
-        if (voices.length > 0) {
-          this.voicesLoaded = true;
-          console.log('Voices loaded:', voices);
+        if (this.speechSynthesis) {
+          const voices = this.speechSynthesis.getVoices();
+          if (voices.length > 0) {
+            this.voicesLoaded = true;
+            console.log('Voices loaded:', voices);
+          }
         }
       },
       toggleSpeech() {
+        if (!this.speechSynthesis) {
+          console.warn('SpeechSynthesis is not available');
+          return;
+        }
         // If the speech is already ongoing, allow pause/resume functionality
         if (this.isSpeaking) {
           if (this.isPaused) {
@@ -67,68 +79,68 @@
           // If not already speaking, start speech
           this.startSpeech();
           this.resumeSpeech();
-
         }
       },
       startSpeech() {
-        // Wait for voices to be loaded before starting speech
-        if (!this.voicesLoaded) {
+        // Ensure voices are loaded
+        if (!this.voicesLoaded || !this.speechSynthesis) {
           console.warn("Voices not loaded yet. Please wait.");
           return;
         }
   
-        // Select the content of the page
         const contentElement = document.querySelector('.vp-doc'); // Ensure the correct selector
         if (!contentElement) {
           console.warn('Main content element not found');
           return;
         }
   
-        const content = contentElement.innerText.trim(); // Retrieve text content and trim any extra whitespace
+        const content = contentElement.innerText.trim(); // Retrieve text content and trim whitespace
         if (!content) {
           console.warn('No content available to read');
           return;
         }
   
-        // Create a new SpeechSynthesisUtterance instance each time
         this.utterance = new SpeechSynthesisUtterance(content);
-        this.utterance.rate = 1.05; // Natural speaking pace
-        this.utterance.pitch = 1; // Neutral pitch
+        this.utterance.rate = 1.05;
+        this.utterance.pitch = 1;
         this.utterance.onend = () => {
           this.isSpeaking = false;
           this.isPaused = false;
         };
   
-        console.log('Starting speech synthesis for content:', content); // Debug log
+        console.log('Starting speech synthesis for content:', content); 
         this.speechSynthesis.speak(this.utterance);
-        this.isSpeaking = true; // Indicate speaking is in progress
-        this.isPaused = false;  // Ensure paused state is false initially
-      },
-      pauseSpeech() {
-        this.speechSynthesis.pause();
-        this.isPaused = true;
-      },
-      resumeSpeech() {
-        this.speechSynthesis.resume();
+        this.isSpeaking = true;
         this.isPaused = false;
       },
+      pauseSpeech() {
+        if (this.speechSynthesis) {
+          this.speechSynthesis.pause();
+          this.isPaused = true;
+        }
+      },
+      resumeSpeech() {
+        if (this.speechSynthesis) {
+          this.speechSynthesis.resume();
+          this.isPaused = false;
+        }
+      },
       restartSpeech() {
-        if (this.utterance) {
-          this.speechSynthesis.cancel(); // Stop the current speech
-          this.startSpeech(); // Restart the speech from the beginning
+        if (this.speechSynthesis && this.utterance) {
+          this.speechSynthesis.cancel(); 
+          this.startSpeech(); 
         }
       },
       resetSpeechProgress() {
-      // Introduce a small delay to minimize the abrupt sound
-      if (this.isSpeaking || this.isPaused) {
-        setTimeout(() => {
-          this.speechSynthesis.cancel();
-          this.isSpeaking = false;
-          this.isPaused = false;
-          console.log('Speech progress reset');
-        }, 50); // Adjust the delay as needed (50ms works in most cases)
-      }
-    },
+        if (this.speechSynthesis && (this.isSpeaking || this.isPaused)) {
+          setTimeout(() => {
+            this.speechSynthesis.cancel();
+            this.isSpeaking = false;
+            this.isPaused = false;
+            console.log('Speech progress reset');
+          }, 50);
+        }
+      },
     },
     computed: {
       buttonClasses() {
@@ -139,6 +151,7 @@
     },
   };
   </script>
+  
   
   <style scoped>
   /* Tailwind CSS styling */
