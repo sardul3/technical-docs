@@ -100,5 +100,8 @@ export default {
       toc: {
         level: [1, 2, 3]
       }
+    },
+    sitemap: {
+      hostname: 'https://sardul3.com'
     }
   };
