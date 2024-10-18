@@ -221,3 +221,5 @@ private boolean hasAdminRole() {
 
 ## Conclusion
 By adopting a progressive approach, starting from naive implementations and evolving toward a production-ready solution using Spring HATEOAS and `ModelAssembler`, APIs can leverage HATEOAS to create more robust, scalable, and secure systems. With careful planning and adherence to best practices, this solution can be extended to support advanced features like role-based link generation, API key authentication, and seamless integration with modern API documentation tools like Swagger.
+
+<TextToSpeech />

@@ -172,3 +172,4 @@ By following this RFC, developers can implement filtering, sorting, pagination, 
 
 For further questions or discussions regarding this RFC, please reach out to the designated team.
 
+<TextToSpeech />

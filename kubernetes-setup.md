@@ -284,3 +284,5 @@ spec:
   - Enable RBAC (Role-Based Access Control) for secure access management.
 
 By following these steps and explanations, you’ll have a production-grade, yet simple, Kubernetes cluster that is flexible and scalable!
+
+<TextToSpeech />

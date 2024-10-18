@@ -309,3 +309,5 @@ Feel free to customize and extend this setup to fit your application’s needs.
 
 ### Conclusion
 In summary, eTags are highly effective at reducing **network bandwidth** usage by avoiding the re-transmission of unchanged resources. However, because the server still needs to perform computational tasks (such as generating eTags, validating resources, and handling the HTTP request), they do not save much **CPU time**. The real benefit of eTags is in optimizing network efficiency rather than server processing efficiency.
+
+<TextToSpeech />

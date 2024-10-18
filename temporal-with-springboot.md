@@ -905,3 +905,5 @@ public class PaymentClient {
 - **Spring Boot Integration**: Temporal SDK is seamlessly integrated with Spring Boot, and beans are used to configure the worker and client interactions.
 
 This example demonstrates how you can implement cancellable workflows using Temporal's `CancellationScope` while following best practices for handling workflow cancellation, maintaining Spring Boot structure, and using Java 21 features.
+
+<TextToSpeech />
