@@ -20,6 +20,7 @@ export default {
           text: 'Bootcamp',
           items: [
             { text: 'Intro to API', link: '/intro-to-api' },
+            { text: 'Milestone #1', link: '/api-dev-mile1' },
           ]
         },
         {
@@ -92,6 +93,9 @@ export default {
       returnToTopLabel: 'Return to Top'
     },
     markdown: {
+      image: {
+        lazyLoading: true
+      },
       lineNumbers: true,
       toc: {
         level: [1, 2, 3]
