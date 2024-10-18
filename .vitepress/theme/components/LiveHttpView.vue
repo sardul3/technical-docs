@@ -29,21 +29,23 @@ const formattedJson = computed(() => {
     class="flex-grow px-4 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded-l-md focus-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
   />
   <button
-    @click="fetchGitHubProfile"
-    class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
-  >
-    <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white text-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-      Fetch Profile
-    </span>
-  </button>
+  @click="fetchGitHubProfile"
+  class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-white hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:text-white dark:focus:ring-blue-800"
+>
+  <span class="absolute inset-0 w-full h-full bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 rounded-lg p-1 transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-100"></span>
+  
+  <span class="relative px-5 py-2.5 text-white transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md">
+    Fetch Profile
+  </span>
+</button>
     </div>
     <div v-if="apiResponse" class="mt-4">
       <div class="flex mb-2">
     <button
       @click="activeTab = 'formatted'"
       :class="[
-        'relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium rounded-l-md group focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800',
-        activeTab === 'formatted' ? 'text-white' : 'bg-white dark:bg-gray-900 text-gray-900 dark:text-white'
+        'relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium rounded-l-md group',
+        activeTab === 'formatted' ? 'text-white' : 'bg-white text-gray-900 dark:text-white'
       ]"
     >
       <span class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-l-md group-hover:bg-opacity-0">
@@ -53,8 +55,8 @@ const formattedJson = computed(() => {
     <button
       @click="activeTab = 'ui'"
       :class="[
-        'relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium rounded-r-md group focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800',
-        activeTab === 'ui' ? 'text-white' : 'bg-white dark:bg-gray-900 text-gray-900 dark:text-white'
+        'relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium rounded-r-md group ',
+        activeTab === 'ui' ? 'text-white' : 'text-gray-900 dark:text-white'
       ]"
     >
       <span class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-r-md group-hover:bg-opacity-0">

@@ -55,7 +55,6 @@ features:
     details: Step-by-step technical guide to master Spring Boot.
 
 ---
-<TextToSpeech />
 
 <!-- ## Testimonials -->
 <!-- <Testimonial /> -->
