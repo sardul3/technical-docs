@@ -21,6 +21,7 @@ export default {
           items: [
             { text: 'Intro to API', link: '/intro-to-api' },
             { text: 'Milestone #1', link: '/api-dev-mile1' },
+            { text: 'Milestone #2', link: '/api-dev-mile2' },
           ]
         },
         {
