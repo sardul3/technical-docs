@@ -206,9 +206,9 @@ The application will start, and you should see output indicating that it's runni
 
 ## Implementing CRUD for Product Entity
 
-Now, let's implement CRUD operations for the `Product` entity. We'll create four main components: the main application class, the model, the service, and the controller.
+Now, let's implement CRUD operations for the `Product` entity. We'll work on four main components: the main application class, the model, the service, and the controller.
 
-### 1. Main Application Class
+### 1. Main Application Class `[Auto-Generated]`
 
 ```java:src/main/java/com/example/productapi/ProductApiApplication.java {6,9}
 package com.example.productapi;
@@ -230,6 +230,13 @@ The `@SpringBootApplication` annotation combines `@Configuration`, `@EnableAutoC
 :::
 
 ### 2. Product Model
+
+> Create a new package called `model` or `models` under `src/main/java/com/example/productapi/` and create the `Product.java` file inside it.
+
+::: tip
+This class represents your real life product entity you want to model.
+Its attributes are the properties of the product. And the methods are the actions you can perform on the product.
+:::
 
 ```java:src/main/java/com/example/productapi/model/Product.java
 package com.example.productapi.model;
@@ -265,6 +272,17 @@ public class Product {
 This is a simple POJO (Plain Old Java Object) representing a Product.
 
 ### 3. Product Service
+
+::: info
+A service in Spring Boot is a component that encapsulates the business logic of an application. 
+:::
+
+::: tip 
+This is a simple in-memory service that stores products in a list.
+In a real-world application, you would use a database to store your data.
+:::
+
+> Create a new package called `service` or `services` under `src/main/java/com/example/productapi/` and create the `ProductService.java` file inside it.
 
 ```java:src/main/java/com/example/productapi/service/ProductService.java {10}
 package com.example.productapi.service;
@@ -318,6 +336,15 @@ public class ProductService {
 This service class manages the business logic for products. It uses an in-memory list to store products instead of a database. The `@Service` annotation marks this as a Spring-managed service bean.
 
 ### 4. Product Controller
+::: info
+A controller in Spring Boot is a component that handles HTTP requests and responses.
+:::
+
+::: tip
+ Make controllers as simple as possible and delegate the business logic to the service layer.
+:::
+
+> Create a new package called `controller` or `controllers` under `src/main/java/com/example/productapi/` and create the `ProductController.java` file inside it.
 
 ```java:src/main/java/com/example/productapi/controller/ProductController.java {11,12,14-15,22,29,34,44}
 package com.example.productapi.controller;
