@@ -53,8 +53,5 @@ features:
   - title: Spring Boot Camp
     link: /spring-boot-camp
     details: Step-by-step technical guide to master Spring Boot.
-
 ---
 
-<!-- ## Testimonials -->
-<!-- <Testimonial /> -->

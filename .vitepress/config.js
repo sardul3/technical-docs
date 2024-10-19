@@ -14,6 +14,7 @@ export default {
       ],
       nav: [
         { text: 'Team', link: '/team' },
+        { text: 'About Me', link: '/about-me' },
       ],
       sidebar: [
         {
