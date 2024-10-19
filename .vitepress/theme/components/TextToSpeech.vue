@@ -58,7 +58,6 @@
           const voices = this.speechSynthesis.getVoices();
           if (voices.length > 0) {
             this.voicesLoaded = true;
-            console.log('Voices loaded:', voices);
           }
         }
       },
@@ -107,7 +106,6 @@
           this.isPaused = false;
         };
   
-        console.log('Starting speech synthesis for content:', content); 
         this.speechSynthesis.speak(this.utterance);
         this.isSpeaking = true;
         this.isPaused = false;
@@ -136,7 +134,6 @@
             this.speechSynthesis.cancel();
             this.isSpeaking = false;
             this.isPaused = false;
-            console.log('Speech progress reset');
           }, 50);
         }
       },

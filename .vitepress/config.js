@@ -20,47 +20,48 @@ export default {
         {
           text: 'Bootcamp',
           items: [
-            { text: 'Intro to API', link: '/intro-to-api' },
-            { text: 'Milestone #1', link: '/api-dev-mile1' },
-            { text: 'Milestone #2', link: '/api-dev-mile2' },
+            { text: 'Intro to API', link: '/boot-camp/intro-to-api' },
+            { text: 'Milestone #1', link: '/boot-camp/api-dev-mile1' },
+            { text: 'Milestone #2', link: '/boot-camp/api-dev-mile2' },
           ]
         },
         {
           text: 'Rest API',
           items: [
-            { text: 'Idempotency', link: '/idempotency' },
-            { text: 'eTags in APIs', link: '/eTags' },
-            { text: 'Caching and Filtering', link: '/caching-and-filtering' },
-            { text: 'HATEOAS', link: '/hateoas' },
-            { text: 'Rate Limiting and Throttling', link: '/rate-limiting-and-throttling' },
+            { text: 'Idempotency', link: '/rest-api/idempotency' },
+            { text: 'eTags in APIs', link: '/rest-api/eTags' },
+            { text: 'Caching and Filtering', link: '/rest-api/caching-and-filtering' },
+            { text: 'HATEOAS', link: '/rest-api/hateoas' },
+            { text: 'Rate Limiting and Throttling', link: '/rest-api/rate-limiting-and-throttling' },
           ]
         },
         {
           text: 'Temporal',
           items: [
-            { text: 'Temporal with Spring Boot', link: '/temporal-with-springboot' },
+            { text: 'Temporal with Spring Boot', link: '/temporal/temporal-with-springboot' },
           ]
         },
         {
           text: 'TDD with Java',
           items: [
-            { text: 'Getting Started', link: '/tdd-with-java/getting-started' },
-            { text: 'Best Practices', link: '/tdd-with-java/best-practices' },
+            { text: 'Getting Started', link: '/tdd/getting-started' },
+            { text: 'Best Practices', link: '/tdd/best-practices' },
           ]
         },
         {
           text: 'Kubernetes',
           items: [
-            { text: 'Setup Local K8', link: '/kubernetes-setup' },
-            { text: 'Deploy Apps on K8', link: '/deploy-apps-on-k8' },
+            { text: 'Setup Local K8', link: '/k8/kubernetes-setup' },
+            { text: 'Deploy Apps on K8', link: '/k8/deploy-apps-on-k8' },
           ]
         },
         {
           text: 'Others',
           items: [
-            { text: 'Clean Code', link: '/clean-code' },
-            { text: 'Neovim', link: '/neovim' },
-            { text: 'SSH and Server Access', link: '/ssh-server-access' },
+            { text: 'Clean Code', link: '/others/clean-code' },
+            { text: 'Data Intensive Design', link: '/others/data-intensive-design' },
+            { text: 'Neovim', link: '/others/neovim' },
+            { text: 'SSH and Server Access', link: '/others/ssh-server-access' },
           ]
         }
       ],

@@ -401,6 +401,169 @@ List<int> userIds;
       "Makes code self-documenting"
     ]
   }
+  ,
+  {
+    id: 11,
+    title: "Avoid Boolean Parameters",
+    content: "Boolean parameters complicate the readability of a method. They obscure the method’s purpose and can lead to confusing logic.",
+    codeToAvoid: `
+\`\`\`java
+void schedule(boolean isUrgent) {
+  if (isUrgent) {
+    // Do urgent scheduling
+  } else {
+    // Do normal scheduling
+  }
+}
+\`\`\`
+    `,
+    codeToPrefer: `
+\`\`\`java
+void scheduleUrgently() {
+  // Do urgent scheduling
+}
+
+void scheduleNormally() {
+  // Do normal scheduling
+}
+\`\`\`
+    `,
+    benefits: [
+      "Improves readability by eliminating ambiguous flags",
+      "Clarifies method intentions",
+      "Avoids conditional complexity"
+    ]
+  },
+  {
+    id: 12,
+    title: "DRY (Don't Repeat Yourself)",
+    content: "Avoid duplicating code. Repeated logic should be abstracted into reusable functions or classes.",
+    codeToAvoid: `
+\`\`\`java
+void createUser(String name, String email) {
+  if (name == null || email == null) {
+    throw new IllegalArgumentException("Invalid input");
+  }
+  // Create user logic
+}
+
+void updateUser(String name, String email) {
+  if (name == null || email == null) {
+    throw new IllegalArgumentException("Invalid input");
+  }
+  // Update user logic
+}
+\`\`\`
+    `,
+    codeToPrefer: `
+\`\`\`java
+void validateInput(String name, String email) {
+  if (name == null || email == null) {
+    throw new IllegalArgumentException("Invalid input");
+  }
+}
+
+void createUser(String name, String email) {
+  validateInput(name, email);
+  // Create user logic
+}
+
+void updateUser(String name, String email) {
+  validateInput(name, email);
+  // Update user logic
+}
+\`\`\`
+    `,
+    benefits: [
+      "Reduces code duplication",
+      "Increases maintainability",
+      "Reduces bugs"
+    ]
+  },
+  {
+    id: 13,
+    title: "Fail Fast",
+    content: "The sooner a system can detect and handle errors, the more robust it will be.",
+    codeToAvoid: `
+\`\`\`java
+void processTransaction(String accountId, double amount) {
+  // Process transaction logic
+  if (accountId == null) {
+    // Handle null account later
+  }
+  // More processing
+}
+\`\`\`
+    `,
+    codeToPrefer: `
+\`\`\`java
+void processTransaction(String accountId, double amount) {
+  if (accountId == null) {
+    throw new IllegalArgumentException("Account ID cannot be null");
+  }
+  // Process transaction logic
+}
+\`\`\`
+    `,
+    benefits: [
+      "Prevents unexpected errors",
+      "Improves reliability",
+      "Makes debugging easier"
+    ]
+  },
+  {
+    id: 14,
+    title: "Encapsulate Conditionals",
+    content: "Instead of writing complex conditionals, extract them into methods with meaningful names.",
+    codeToAvoid: `
+\`\`\`java
+if (age > 18 && hasValidId && !isRestricted) {
+  // Grant access
+}
+\`\`\`
+    `,
+    codeToPrefer: `
+\`\`\`java
+if (isEligibleForAccess(age, hasValidId, isRestricted)) {
+  // Grant access
+}
+
+boolean isEligibleForAccess(int age, boolean hasValidId, boolean isRestricted) {
+  return age > 18 && hasValidId && !isRestricted;
+}
+\`\`\`
+    `,
+    benefits: [
+      "Improves readability",
+      "Clarifies logic",
+      "Easier to change in the future"
+    ]
+  },
+  {
+    id: 15,
+    title: "Comment Only Where Necessary",
+    content: "Comments should explain why code exists, not what it does. The code itself should be clear enough.",
+    codeToAvoid: `
+\`\`\`java
+// This function calculates the total price including tax
+double calculatePrice(double price, double taxRate) {
+  return price + (price * taxRate);
+}
+\`\`\`
+    `,
+    codeToPrefer: `
+\`\`\`java
+double calculateTotalPriceWithTax(double price, double taxRate) {
+  return price + (price * taxRate);
+}
+\`\`\`
+    `,
+    benefits: [
+      "Reduces unnecessary comments",
+      "Increases code self-documentation",
+      "Makes code cleaner"
+    ]
+  }
 ];
 const currentIndex = ref(0);
 const isLoading = ref(false);
@@ -439,7 +602,7 @@ const card = computed(() => cleanCodeCards[currentIndex.value]);
 const highlightCode = () => {
   const codeBlocks = document.querySelectorAll('pre code');
   codeBlocks.forEach((block) => {
-    hljs.highlightElement(block); // Highlight each code block
+    // hljs.highlightElement(block); // Highlight each code block
   });
 };
 

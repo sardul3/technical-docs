@@ -1,7 +1,7 @@
 # Database Integration and More <Label text="M2" type="milestone" />
 
 ::: tip
-This guide builds upon the basics learned in [Milestone #1](/api-dev-mile1), introducing database integration, more complex entity relationships, and advanced API features.
+This guide builds upon the basics learned in [Milestone #1](/boot-camp/api-dev-mile1), introducing database integration, more complex entity relationships, and advanced API features.
 :::
 
 ## Introduction
