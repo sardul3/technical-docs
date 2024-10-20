@@ -1,12 +1,12 @@
 # Database Integration and More <Label text="M2" type="milestone" />
 
 ::: tip
-This guide builds upon the basics learned in [Milestone #1](/boot-camp/api-dev-mile1), introducing database integration, more complex entity relationships, and advanced API features.
+This guide builds upon the basics learned in [Milestone #1](/boot-camp/api-dev-mile1), introducing database integration and more.
 :::
 
 ## Introduction
 
-In this milestone, we'll enhance our e-commerce API by integrating a database, implementing more complex entity relationships, and adding advanced features such as input validation and error handling.
+In this milestone, we'll enhance our e-commerce products API by integrating a database, and add advanced features such as input validation and error handling.
 
 ## Choosing the Right Database
 
@@ -30,7 +30,7 @@ Relational databases are ideal for structured data with complex relationships. T
 - Strict schema enforcement
 
 ::: info Structured Data
-Structured data is organized in a predefined format, typically in tables with rows and columns. For example, a "Customer" table might have columns for ID, Name, Email, and Address, with each row representing a unique customer.
+Structured data is organized in a predefined format, typically in tables with rows and columns. 
 :::
 
 ::: tip ACID Properties
@@ -40,30 +40,6 @@ Structured data is organized in a predefined format, typically in tables with ro
 - Durability: Completed transactions are permanently saved.
 
 These properties ensure reliable processing of database transactions.
-:::
-
-#### Database Normalization
-
-Normalization is the process of organizing data to reduce redundancy and improve data integrity. The main normal forms are:
-
-1. First Normal Form (1NF): Eliminate repeating groups
-2. Second Normal Form (2NF): Remove partial dependencies
-3. Third Normal Form (3NF): Remove transitive dependencies
-
-::: info Normalization Example
-Consider a table "Orders" with columns: OrderID, CustomerName, ProductID, ProductName, Quantity.
-
-To normalize:
-1. 1NF: Ensure each column contains atomic values (already satisfied).
-2. 2NF: Create separate tables for Customers and Products, linking them to Orders via IDs.
-3. 3NF: Move any columns that depend on non-key fields (e.g., ProductName depends on ProductID) to their respective tables.
-
-Result: 
-- Orders (OrderID, CustomerID, ProductID, Quantity)
-- Customers (CustomerID, CustomerName)
-- Products (ProductID, ProductName)
-
-This structure reduces data redundancy and improves data integrity.
 :::
 
 ### NoSQL Databases (e.g., MongoDB)
@@ -154,9 +130,15 @@ H2 is perfect for development and testing due to its ease of setup and in-memory
    :::
 
 2. Configure H2 in `application.yml`:
-
+::: tip
+ The auto-generated project already has a file `application.properties`
+ It is my personal preference to use `application.yml` instead to manage app configurations
+:::
+Add the following to `application.yml`:
    ```yaml
    spring:
+     application:
+       name: product-api
      datasource:
        url: jdbc:h2:mem:testdb
        driver-class-name: org.h2.Driver
@@ -172,33 +154,102 @@ H2 is perfect for development and testing due to its ease of setup and in-memory
 JPA (Java Persistence API) is a specification for accessing, persisting, and managing data between Java objects and a relational database. Spring Data JPA is a part of the larger Spring Data project and makes it easy to implement JPA-based repositories.
 :::
 ## Model Entities and Relationships
-Let's define our main entities: Products, Categories, Customers, and Orders.
+Let's define our main entities.
+For now, we can just get away with having Product entity with no relationships for simplicity's sake.
+However, in a real-world application, we would want to have more entities and relationships to better model the problem we are trying to solve.
+So, for this demo, just creating the Product entity will suffice but feel free to follow through and add the rest of the entities and relationships provided in this guide.
+
+
+#### Introducing Lombok
+
+Lombok is a Java library that helps reduce boilerplate code in your Java classes. It uses annotations to automatically generate common code patterns at compile-time, such as getters, setters, constructors, and more. This leads to cleaner, more readable code and saves developers time and effort.
+
+Key benefits of using Lombok include:
+- Reduced code verbosity
+- Fewer errors from manually written boilerplate code
+- Easier maintenance of classes
+- Improved code readability
+
+Now, let's add Lombok to our project:
+
+::: code-group
+```groovy [Gradle]
+dependencies {
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}
+```
+
+```xml [Maven]
+<dependencies>
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.22</version>
+        <scope>provided</scope>
+    </dependency>
+</dependencies>
+```
+:::
+
+::: tip
+Make sure to enable annotation processing in your IDE to use Lombok effectively.
+:::
 
 ### Product Entity
-```java{1,2,6,7,8,9,11,13,15,16}
-@Entity // 1️⃣
-@Table(name = "products") // 2️⃣
+Now, we will refactor the `Product.java` file in the `src/main/java/com/example/demo/model` directory to use JPA annotations and Lombok, transforming it from a simple POJO to a DB entity:
+
+```java{1-4,7-10,12,14,16,17,19,21,22}
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import javax.persistence.*;
+import java.math.BigDecimal;
+
+@Entity
+@Table(name = "products")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
-    @Id // 3️⃣
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 4️⃣
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false) // 5️⃣
+    @Column(nullable = false)
     private String name;
 
     private String description;
 
-    @Column(nullable = false) // 5️⃣
+    @Column(nullable = false)
     private BigDecimal price;
 
-    @ManyToOne // 6️⃣
-    @JoinColumn(name = "category_id") // 9️⃣
+    // TODO: Remove this if you want to just add Product entity with no relationships for now
+    @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 }
 ```
+
+Let's break down the changes:
+
+1. We've added Lombok annotations:
+   - `@Data`: Generates getters, setters, `toString()`, `equals()`, and `hashCode()` methods.
+   - `@NoArgsConstructor`: Generates a no-args constructor.
+   - `@AllArgsConstructor`: Generates a constructor with all fields as arguments.
+
+2. We've added JPA annotations:
+   - `@Entity`: Marks the class as a JPA entity.
+   - `@Table(name = "products")`: Specifies the table name in the database.
+   - `@Id`: Marks the field as the primary key.
+   - `@GeneratedValue(strategy = GenerationType.IDENTITY)`: Configures the way of increment for the specified column (field).
+   - `@Column(nullable = false)`: Specifies that the column cannot contain null values.
+   - `@ManyToOne`: Defines a many-to-one relationship between Product and Category.
+   - `@JoinColumn(name = "category_id")`: Specifies the foreign key column for the Category relationship.
+
+These changes transform our simple POJO into a JPA entity with Lombok-generated boilerplate code, making it ready for database operations and reducing the amount of code we need to write manually.
+
+
 ### Category Entity
 ```java{1,2,6,7,8,11,13,14}
 @Entity 
@@ -305,7 +356,7 @@ Relationship Explanations:
 
 3. Order to Products (Many-to-Many)
    - 🔗 An order can include multiple products
-   - 🔗 A product can be part of multiple orders
+   - ��� A product can be part of multiple orders
    - 🏷️ JPA: `@ManyToMany` on both Order and Product
    - 📊 Requires a join table (e.g., `order_products`)
 
@@ -321,12 +372,17 @@ Cascading in JPA defines how state changes are propagated from parent entities t
 
 ## Implementing Repositories and Services
 
-Create repository interfaces for each entity:
+Create repository interface for our entity under `src/main/java/com/example/productapi/repository` directory:
 
 ```java
+package com.example.productapi.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import com.example.productapi.model.Product;
+
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {}
-
 ```
 ::: info TASK
 Implement the repository interfaces for the remaining entities.
@@ -350,7 +406,18 @@ The service layer in a Spring Boot application serves several important purposes
 ::: tip
 By using a service layer, you create a more modular, maintainable, and testable application structure.
 :::
+So, lets update the service class for the `Product` entity under `src/main/java/com/example/productapi/service` directory to 
+account for the DB changes as opposed to in-memmory implementation we used in Milestone #1:
 ```java
+package com.example.productapi.service;
+
+import com.example.productapi.model.Product;
+import com.example.productapi.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ProductService {
@@ -362,14 +429,25 @@ public class ProductService {
 
     public Product getProductById(Long id) {
         return productRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+            .orElseThrow(() -> new RuntimeException("Product not found"));
     }
 
     public Product createProduct(Product product) {
         return productRepository.save(product);
     }
 
-    // ... other methods
+    public Product updateProduct(Long id, Product productDetails) {
+        Product product = getProductById(id);
+        product.setName(productDetails.getName());
+        product.setDescription(productDetails.getDescription());
+        product.setPrice(productDetails.getPrice());
+        return productRepository.save(product);
+    }
+
+    public void deleteProduct(Long id) {
+        Product product = getProductById(id);
+        productRepository.delete(product);
+    }
 }
 ```
 
@@ -379,14 +457,48 @@ Implement similar service classes for other entities.
 
 ## Input Validation and DTOs
 
+### Adding Spring Boot Validation Starter
+
+Before we implement DTOs with validation, we need to add the Spring Boot validation starter to our project. This starter provides support for Java Bean Validation API.
+
+Add the following dependency to your `build.gradle` or `pom.xml` file:
+
+::: code-group
+```groovy [Gradle]
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+}
+```
+```xml [Maven]
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+</dependencies>
+```
+:::
+
 ### Using Bean Validation Annotations
 
-Bean Validation annotations provide a powerful way to enforce data integrity in your DTOs (Data Transfer Objects). Here's an example of a ProductDTO with validation annotations:
+Bean Validation annotations provide a powerful way to enforce data integrity in your DTOs (Data Transfer Objects). Here's an example of a ProductDTO with validation annotations created under `src/main/java/com/example/productapi/dto` directory:
 
+```java{12,15,18,21,22}
+package com.example.productapi.dto;
 
-```java{2,5,8,9,12}
-public class ProductDTO {
-    @NotBlank(message = "Product name is required")
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.math.BigDecimal;
+
+@Getter
+@Setter
+public class ProductDto {
+    @NotBlank(message = "Name cannot be empty")
     private String name;
 
     @Size(max = 500, message = "Description must be less than 500 characters")
@@ -395,10 +507,9 @@ public class ProductDTO {
     @Positive(message = "Price must be positive")
     @DecimalMin(value = "0.01", message = "Price must be at least 0.01")
     private BigDecimal price;
-
-    @NotNull(message = "Category ID is required")
-    private Long categoryId;
 }
+
+
 ```
 <details>
   <summary>Other DTOs</summary>
@@ -501,53 +612,121 @@ While records are great for simple DTOs, traditional classes might be more suita
 
 By using these validation annotations and DTOs, you can ensure that your API receives valid data and maintains a clean separation between your API contract and your domain model.
 
-## New Endpoints
+## Controller Endpoints Refactoring
+Since, we have modified our service layer to use the database, our controller class is out of sync as it is not utilizing both the DTOs and the service layer.
 
-Add these new endpoints to your controllers:
+Lets refactor the controller class to use the DTOs and the service layer so that when a user sends in a request, it is validated and then sent to the service layer to be processed. At the end, it is saved to the database.
 
-1. Add a category:
-   ```java
-   @PostMapping("/categories")
-   public ResponseEntity<CategoryDTO> createCategory(@Valid @RequestBody CategoryDTO categoryDTO) {
-       Category category = categoryService.createCategory(categoryDTO);
-       return ResponseEntity.status(HttpStatus.CREATED).body(mapToDTO(category));
-   }
-   ```
+Within `src/main/java/com/example/productapi/controller` directory, update the `ProductController` class to use the DTOs and the service layer:
 
-2. Place an order:
-   ```java
-   @PostMapping("/orders")
-   public ResponseEntity<OrderDTO> placeOrder(@Valid @RequestBody OrderRequestDTO orderRequestDTO) {
-       Order order = orderService.placeOrder(orderRequestDTO);
-       return ResponseEntity.status(HttpStatus.CREATED).body(mapToDTO(order));
-   }
-   ```
+```java
+package com.example.productapi.controller;
 
-3. Track order status:
-   ```java
-   @GetMapping("/orders/{id}/status")
-   public ResponseEntity<OrderStatusDTO> getOrderStatus(@PathVariable Long id) {
-       OrderStatus status = orderService.getOrderStatus(id);
-       return ResponseEntity.ok(new OrderStatusDTO(id, status));
-   }
-   ```
+import com.example.productapi.dto.ProductDto;
+import com.example.productapi.model.Product;
+import com.example.productapi.service.ProductService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-4. Create a new customer:
-   ```java
-   @PostMapping("/customers")
-   public ResponseEntity<CustomerDTO> createCustomer(@Valid @RequestBody CustomerDTO customerDTO) {
-       Customer customer = customerService.createCustomer(customerDTO);
-       return ResponseEntity.status(HttpStatus.CREATED).body(mapToDTO(customer));
-   }
-   ```
+import java.util.List;
+import java.util.stream.Collectors;
+
+@RestController
+@RequestMapping("/api/products")
+@RequiredArgsConstructor
+public class ProductController {
+    private final ProductService productService;
+
+    @GetMapping
+    public ResponseEntity<List<ProductDto>> getAllProducts() {
+        List<ProductDto> products = productService.getAllProducts().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(products);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) {
+        try {
+            Product product = productService.getProductById(id);
+            return ResponseEntity.ok(convertToDTO(product));
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping
+    public ResponseEntity<ProductDto> createProduct(@Valid @RequestBody ProductDto productDTO) {
+        Product product = convertToEntity(productDTO);
+        Product createdProduct = productService.createProduct(product);
+        return ResponseEntity.status(HttpStatus.CREATED).body(convertToDTO(createdProduct));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductDto> updateProduct(@PathVariable Long id, @Valid @RequestBody ProductDto productDTO) {
+        try {
+            Product product = convertToEntity(productDTO);
+            Product updatedProduct = productService.updateProduct(id, product);
+            return ResponseEntity.ok(convertToDTO(updatedProduct));
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+        try {
+            productService.deleteProduct(id);
+            return ResponseEntity.noContent().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    private ProductDto convertToDTO(Product product) {
+        ProductDto dto = new ProductDto();
+        dto.setName(product.getName());
+        dto.setDescription(product.getDescription());
+        dto.setPrice(product.getPrice());
+        return dto;
+    }
+
+    private Product convertToEntity(ProductDto dto) {
+        Product product = new Product();
+        product.setName(dto.getName());
+        product.setDescription(dto.getDescription());
+        product.setPrice(dto.getPrice());
+        return product;
+    }
+}
+```
+
+::: tip
+At the moment, we are using custom mappers. We can this further by using mapping libs like MapStruct or ModelMapper. We will cover this later in the course.
+:::
+
+::: info
+As a general convention, all private methods tend to be located at the bottom of the class.
+:::
+
+::: warning Assignment
+If you added other entities, practice by implementing the controller endpoints for the new entities and services as well.
+Create API endpoints for the following usecases:
+    - Create a new order
+    - Update an existing order
+    - Delete an existing order
+    - Get all orders for a customer
+    - Get all orders for a product
+:::
 
 ### Explanation of Annotations and DTOs
 
-1. `@Valid`: This annotation triggers validation of the annotated argument. When applied to a method parameter, it tells Spring to validate the object before invoking the method.
+1. `@Valid`: This annotation triggers validation of the annotated argument. When applied to a method parameter, it tells Spring to validate the object before invoking the method. This is where the DTO validation annotations we implemented earlier come into play.
 
 2. `@RequestBody`: This annotation indicates that the method parameter should be bound to the body of the web request. Spring automatically deserializes the JSON into a Java type.
-
-3. DTOs (Data Transfer Objects): We use DTOs (e.g., `CategoryDTO`, `OrderRequestDTO`) to define the structure of the data being sent to or from the API. This allows us to control exactly what data is exposed and validate it independently of our domain model.
 
 ### Common REST Controller Annotations
 
@@ -585,43 +764,6 @@ While it's possible to use `@ResponseStatus` on methods to set status codes and 
 :::
 
 By using these annotations, DTOs, and `ResponseEntity`, we create a well-structured, validated, and flexible API that adheres to RESTful principles and provides clear, consistent responses to clients.
-
-## Lombok: Reducing Boilerplate Code
-
-Lombok is a Java library that helps reduce boilerplate code in your Java classes. It uses annotations to automatically generate common code patterns at compile-time, such as getters, setters, constructors, and more. This leads to cleaner, more readable code and saves developers time and effort.
-
-### How Lombok Helps Developers
-
-1. **Code Reduction**: Lombok significantly reduces the amount of code you need to write manually. For example, instead of writing dozens of lines for getters and setters, you can use a single `@Data` annotation.
-
-2. **Improved Readability**: By eliminating boilerplate code, your classes become more concise and easier to read, focusing on the essential business logic.
-
-3. **Reduced Error Potential**: Automatically generated code is less prone to errors that can occur when manually writing repetitive code.
-
-4. **Easy Maintenance**: When you need to add or remove fields, Lombok automatically updates related methods, reducing the risk of inconsistencies.
-
-5. **Flexibility**: Lombok provides fine-grained control over generated code through its various annotations and parameters.
-
-### Common Lombok Annotations
-
-We've already used Lombok annotations in our entity classes. Here's a quick overview of useful Lombok annotations:
-
-- `@Data`: Generates getters, setters, toString, equals, and hashCode methods
-- `@NoArgsConstructor`: Generates a no-args constructor
-- `@AllArgsConstructor`: Generates a constructor with all fields as arguments
-- `@Builder`: Implements the Builder pattern
-- `@Slf4j`: Adds a logger field
-- `@Getter` / `@Setter`: Generates getters and setters for fields
-- `@EqualsAndHashCode`: Generates `equals()` and `hashCode()` methods
-- `@ToString`: Generates a `toString()` method
-
-::: tip
-While Lombok can greatly reduce boilerplate code, it's important to understand what code it's generating. IDEs with Lombok plugins can help you view the generated code.
-:::
-
-::: info
-By using Lombok, you can write more concise and maintainable Java code, allowing you to focus on the core functionality of your application rather than repetitive boilerplate code.
-:::
 
 ## Switching to a Production Database
 
@@ -702,6 +844,64 @@ The `ddl-auto` setting controls how Hibernate handles database schema generation
 For production, it's often recommended to use `validate` or `none` and manage schema changes manually.
 :::
 
+## Testing Your Application
+
+Now that you've set up your application, let's test it and verify that data is being saved to the database.
+
+> Start your Spring Boot application (if it's not already running).
+
+Test the endpoints using a tool like Postman or cURL:
+
+    a. Create a product:
+```bash
+curl -X POST http://localhost:8080/api/products \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Test Product",
+    "description": "This is a test product",
+    "price": 19.99
+  }'
+```
+
+    b. Get all products:
+```bash
+curl http://localhost:8080/api/products
+```
+
+    c. Get a specific product:
+```bash
+curl http://localhost:8080/api/products/1
+```
+
+    d. Update a product:
+```bash
+curl -X PUT http://localhost:8080/api/products/1 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Updated Test Product",
+    "description": "This is an updated test product",
+    "price": 24.99
+  }'
+```
+
+::: warning
+Sending in a invalid req such as invalid price or description length will result in a 400 Bad Request response but there is no appropriate and meaningful error message for the user. We will fix this in the next milestone where we will implement a global exception handler with meaningful error messages.
+:::
+
+ To verify if data was saved to the H2 database:
+1. Access the H2 console by navigating to `http://localhost:8080/h2-console` in your web browser.
+
+2. Use the following settings to connect:
+    - JDBC URL: `jdbc:h2:mem:testdb`
+    - User Name: `sa`
+    - Password: `password`
+3. Once connected, you can run SQL queries to check the data, e.g.:
+       ```sql
+       SELECT * FROM PRODUCTS;
+       ```
+
+By following these steps, you can test your application's endpoints and verify that data is being correctly saved to and retrieved from the H2 database.
+
 ## Summary
 
 In this milestone, we've covered:
@@ -709,11 +909,16 @@ In this milestone, we've covered:
 - Integrating H2 database
 - Modeling entity relationships
 - Implementing repositories and services
-- Input validation and centralized error handling
-- Adding new endpoints for extended functionality
+- Simple Payload / Input validation 
 - Refactoring with Lombok
-- Instructions for switching to a production database
 
 These enhancements provide a solid foundation for building a robust, scalable e-commerce API.
 
+[View Complete Code Here](https://github.com/sardul3/product-api/tree/milestone-2)
+
 <TextToSpeech />
+
+
+
+
+
