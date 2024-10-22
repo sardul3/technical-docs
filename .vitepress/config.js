@@ -23,6 +23,7 @@ export default {
             { text: 'Intro to API', link: '/boot-camp/intro-to-api' },
             { text: 'Milestone #1', link: '/boot-camp/api-dev-mile1' },
             { text: 'Milestone #2', link: '/boot-camp/api-dev-mile2' },
+            { text: 'Milestone #3', link: '/boot-camp/api-dev-mile3' },
           ]
         },
         {
