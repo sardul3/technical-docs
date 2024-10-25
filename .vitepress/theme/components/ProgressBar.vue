@@ -53,7 +53,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 4px;
+    height: 6px;
     background-color: rgba(0, 0, 0, 0.1);
     z-index: 9999;
   }
