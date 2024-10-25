@@ -25,6 +25,7 @@ export default {
             { text: 'Milestone #2', link: '/boot-camp/api-dev-mile2' },
             { text: 'Milestone #3', link: '/boot-camp/api-dev-mile3' },
             { text: 'Milestone #4', link: '/boot-camp/api-dev-mile4' },
+            { text: 'Milestone #5', link: '/boot-camp/api-dev-mile5' },
           ]
         },
         {
@@ -108,5 +109,42 @@ export default {
     },
     sitemap: {
       hostname: 'https://sardul3.com'
+    },
+    vue: {
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => ['swagger-ui'].includes(tag)
+        }
+      }
+    },
+    vite: {
+      publicDir: 'public',
+      optimizeDeps: {
+        include: ['swagger-ui-dist']
+      },
+      plugins: [
+        {
+          name: 'yaml-loader',
+          transform(code, id) {
+            if (id.endsWith('.yaml') || id.endsWith('.yml')) {
+              return {
+                code: `export default ${JSON.stringify(code)}`,
+                map: null
+              }
+            }
+          }
+        }
+      ],
+      resolve: {
+        alias: {
+          '@theme': '/.vitepress/theme'
+        }
+      },
+      server: {
+        fs: {
+          // Allow serving files from these directories
+          allow: ['public']
+        }
+      }
     }
   };
