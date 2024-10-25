@@ -1,3 +1,5 @@
+<ProgressBar />
+
 # Database Integration and More <Label text="M2" type="milestone" />
 
 ::: tip

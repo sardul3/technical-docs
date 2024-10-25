@@ -1,3 +1,5 @@
+<ProgressBar />
+
 # Content Negotiation, links and more <Label text="M4" type="milestone" />
 
 In this milestone, we'll explore advanced techniques to enhance our API's functionality, flexibility, and developer experience. We'll cover object mapping, content negotiation, and HATEOAS

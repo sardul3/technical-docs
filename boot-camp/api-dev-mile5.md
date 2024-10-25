@@ -1,3 +1,4 @@
+<ProgressBar />
 # API Documentation, Versioning and more <Label text="M5" type="milestone" />
 
 In this milestone, we will cover:
@@ -68,7 +69,7 @@ Key Benefits:
 3. **Testing Swagger**
 
    Run your application, then navigate to `http://localhost:8080/swagger-ui.html` to view your API documentation in Swagger UI.
-The doc should look like [this](/boot-camp/api-spec-v1.md){:target="_blank"}
+The doc should look like [this](/boot-camp/api-spec-v1.md)
 
 Right now, the generated doc looks very simple and is missing key details as we did not provide any context to the Swagger UI.
 Lets do that next to improve the overall API documentation.

@@ -1,3 +1,5 @@
+<ProgressBar />
+
 # API Development with Spring Boot <Label text="M1" type="milestone" />
 ::: tip
 This guide is the first step to learn the basics of API development with Spring Boot.

@@ -11,6 +11,7 @@ import PortfolioHeader from './components/PortfolioHeader.vue'
 import LanguageLogos from './components/LanguageLogos.vue'
 import PortfolioContainer from './components/PortfolioContainer.vue'
 import DataIntensiveLessons from './components/DataIntensiveLessons.vue'
+import ProgressBar from './components/ProgressBar.vue'
 
 import './tailwind.css'  // Import Tailwind CSS
 import SwaggerComponent from './components/SwaggerComponent.vue'
@@ -33,5 +34,7 @@ export default {
     app.component('PortfolioContainer', PortfolioContainer)
     app.component('DataIntensiveLessons', DataIntensiveLessons)
     app.component('SwaggerComponent', SwaggerComponent)
+    app.component('ProgressBar', ProgressBar)
+
   }
 }

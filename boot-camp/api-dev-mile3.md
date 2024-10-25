@@ -1,3 +1,5 @@
+<ProgressBar />
+
 # Exception Handling and Best Practices <Label text="M3" type="milestone" />
 
 ## Objective
