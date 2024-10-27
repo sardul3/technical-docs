@@ -26,6 +26,7 @@ export default {
             { text: 'Milestone #3', link: '/boot-camp/api-dev-mile3' },
             { text: 'Milestone #4', link: '/boot-camp/api-dev-mile4' },
             { text: 'Milestone #5', link: '/boot-camp/api-dev-mile5' },
+            { text: 'Milestone #6', link: '/boot-camp/api-dev-mile6' },
           ]
         },
         {
