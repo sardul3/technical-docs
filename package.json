@@ -13,7 +13,7 @@
   "dependencies": {
     "js-yaml": "^4.1.0",
     "markdown-it": "^14.1.0",
-    "swagger-ui-dist": "^5.17.14",
+    "swagger-ui-dist": "^5.18.2",
     "vitepress-plugin-mermaid": "^2.0.17"
   }
 }
