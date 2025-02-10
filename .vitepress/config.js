@@ -3,6 +3,9 @@ export default {
     head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
     description: 'Comprehensive developer documentation for REST APIs, Temporal, Kubernetes, and more.',
     lastUpdated: true,
+    redirects: {
+      '/4l1sha214': 'https://v0-ali-djoxkt.vercel.app/'
+    },
     themeConfig: {
       logo: '/logo.png',
       head: [
@@ -14,7 +17,7 @@ export default {
       ],
       nav: [
         { text: 'Team', link: '/team' },
-        { text: 'About Me', link: '/about-me' },
+        { text: 'About Me', link: '/about-me' }
       ],
       sidebar: [
         {
