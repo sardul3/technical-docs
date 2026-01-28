@@ -13,7 +13,7 @@ export default {
       ],
       socialLinks: [
         { icon: 'github', link: 'https://github.com/sardul3' },
-        { icon: 'linkedin', link: 'https://www.linkedin.com/in/sagar-poud/' }
+        { icon: 'linkedin', link: 'https://www.linkedin.com/in/sagar-poudel/' }
       ],
       nav: [
         { text: 'Team', link: '/team' },
@@ -30,6 +30,18 @@ export default {
             { text: 'Milestone #4', link: '/boot-camp/api-dev-mile4' },
             { text: 'Milestone #5', link: '/boot-camp/api-dev-mile5' },
             { text: 'Milestone #6', link: '/boot-camp/api-dev-mile6' },
+          ]
+        },
+        {
+          text: 'Go API Bootcamp',
+          items: [
+            { text: 'Intro to API (Go)', link: '/boot-camp/go-intro-to-api' },
+            { text: 'Go Milestone #1', link: '/boot-camp/go-api-mile1' },
+            { text: 'Go Milestone #2', link: '/boot-camp/go-api-mile2' },
+            { text: 'Go Milestone #3', link: '/boot-camp/go-api-mile3' },
+            { text: 'Go Milestone #4', link: '/boot-camp/go-api-mile4' },
+            { text: 'Go Milestone #5', link: '/boot-camp/go-api-mile5' },
+            { text: 'Go Milestone #6', link: '/boot-camp/go-api-mile6' },
           ]
         },
         {

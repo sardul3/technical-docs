@@ -1,25 +1,45 @@
 export default [
-    {
-      title: "Senior Software Engineer - Kroger",
-      date: "June 2023 - Present",
-      description: "Building resilient, distributed services to enhance the digital presence and enrich digital assets for Kroger.",
-      tasks: [
-        "Developed microservices using Spring Boot and Java 11 to handle high-volume transactions.",
-        "Implemented request tracing and correlation ID management using Spring Cloud Gateway.",
-        "Enhanced API reliability through idempotency keys and caching strategies using Redis.",
-        "Automated build and promotion processes using Maven, Docker, and Jib for seamless CI/CD.",
-      ],
-    },
-    {
-      title: "Software Engineer - Verizon",
-      date: "Jan 2020 - May 2023",
-      description: "Worked on developing and maintaining Verizon's high-availability customer-facing applications.",
-      tasks: [
-        "Optimized backend services to handle 1M+ daily transactions, improving performance by 30%.",
-        "Led the integration of a new customer analytics system, reducing latency in data processing by 50%.",
-        "Collaborated with front-end teams to implement responsive, API-driven web applications.",
-        "Adopted containerization strategies using Docker and Kubernetes to ensure high scalability.",
-      ],
-    },
-  ];
-  
+  {
+    title: "Senior Java Backend Engineer",
+    company: "Kroger",
+    date: "May 2021 – Present · Cincinnati, OH",
+    description: "Architecting and building the Digital Assets Platform on Azure with event-driven microservices, secure REST APIs, and zero-downtime deployments.",
+    tasks: [
+      "Designed event-driven architecture using Apache Kafka, processing 100k+ assets daily with low-latency delivery.",
+      "Built and secured Spring Boot REST APIs conforming to OpenAPI 3.0, accelerating partner integrations.",
+      "Optimized CI/CD with GitHub Actions, Docker, and JFrog Artifactory, reducing deployment time by 50%.",
+      "Implemented Blue-Green Deployment for Kubernetes clusters, achieving zero-downtime production rollouts.",
+      "Championed DDD and Hexagonal Architecture; led architecture reviews and mentored junior engineers.",
+    ],
+  },
+  {
+    title: "Application Developer",
+    company: "Kansas State University",
+    date: "Oct 2019 – Feb 2021 · 1 yr 5 mos · Full-time · Manhattan, Kansas",
+    description: "Developed and maintained applications for Kansas State University, with emphasis on Spring Boot microservices, secure APIs, and test-driven delivery.",
+    tasks: [
+      "Practiced Test-Driven Development (TDD) to deliver reliable, well-tested features.",
+      "Built backend services and APIs using Spring Boot.",
+      "Designed and developed scalable Spring Boot microservices-based systems, enhancing maintainability and platform resilience.",
+      "Engineered secure REST APIs with Spring Security, OAuth2, and JWT for enterprise-grade authentication and authorization.",
+      "Optimized backend database operations with advanced SQL and stored procedures, achieving faster query performance.",
+      "Implemented JUnit and Mockito-based TDD workflows, achieving over 90% unit test coverage and reducing production defects.",
+      "Led performance tuning initiatives across services, improving response times and throughput under load.",
+      "Participated in architecture reviews and peer code reviews, improving code quality and consistency.",
+      "Mentored junior developers on REST API best practices, secure coding standards, and performance optimization.",
+    ],
+  },
+  {
+    title: "React Developer",
+    company: "Microsoft",
+    date: "Jun 2019 – Sep 2019 · 4 mos · Contract · Spokane-Coeur d'Alene Area",
+    description: "Contributed to web applications and API integration at Microsoft, with focus on dynamic UIs and API design.",
+    tasks: [
+      "Developed user interfaces using React.js.",
+      "Designed and integrated REST APIs for front-end consumption.",
+      "Built and optimized dynamic UI components, improving frontend performance and reducing page load times.",
+      "Engineered REST API design patterns and collaborated on API-first development with backend teams.",
+      "Participated in code reviews and contributed to consistent API contracts and documentation.",
+    ],
+  },
+];
