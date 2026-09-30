@@ -16,10 +16,20 @@ export default {
         { icon: 'linkedin', link: 'https://www.linkedin.com/in/sagar-poudel/' }
       ],
       nav: [
+        { text: 'Claude Code', link: '/claude-code/part-1-getting-started' },
         { text: 'Team', link: '/team' },
         { text: 'About Me', link: '/about-me' }
       ],
       sidebar: [
+        {
+          text: 'Claude Code Series',
+          items: [
+            { text: 'Part 1: Getting Started', link: '/claude-code/part-1-getting-started' },
+            { text: 'Part 2: Power-User Setup', link: '/claude-code/part-2-power-user-setup' },
+            { text: 'Part 3: Onboarding', link: '/claude-code/part-3-onboarding' },
+            { text: 'Part 4: Guardrails & Value', link: '/claude-code/part-4-guardrails-and-value' },
+          ]
+        },
         {
           text: 'Bootcamp',
           items: [
