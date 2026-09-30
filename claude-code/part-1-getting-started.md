@@ -15,8 +15,8 @@ This is Part 1 of a four-part series. It covers getting started properly: instal
 | Part | Topic |
 |------|-------|
 | **Part 1** | Getting Started the Right Way (this article) |
-| Part 2 | The Power-User Setup (coming next) |
-| Part 3 | Onboarding a New Engineer |
+| [Part 2](/claude-code/part-2-power-user-setup) | The Power-User Setup |
+| Part 3 | Onboarding a New Engineer (coming next) |
 | Part 4 | Guardrails, Rollout, and Value |
 
 ---
@@ -408,4 +408,4 @@ Getting started well comes down to three habits: know which settings and credent
 
 ---
 
-**Next:** Part 2: The Power-User Setup — Statusline, skills, hooks, subagents, MCP, and running Claude Code headless in CI.
+**Next:** [Part 2: The Power-User Setup](/claude-code/part-2-power-user-setup) — Statusline, skills, hooks, subagents, MCP, and running Claude Code headless in CI.
