@@ -191,11 +191,7 @@ Target: module `$module`, `$method $path`.
 - Summarize: files changed, endpoint signature, and any follow-ups (OpenAPI docs, security config).
 ```
 
-Put `error-contract.md` next to it, with your ProblemDetail shape and examples. Invoke it as `/add-rest-endpoint order-service POST /orders/{id}/coupons`, or just ask "add an endpoint to apply a coupon to an order" and let Claude load it.
-
-::: warning ADD YOUR STORY
-Which team procedure you turned into a skill first, and what changed in review quality.
-:::
+Put `error-contract.md` next to it, with your ProblemDetail shape and examples. Invoke it as `/add-rest-endpoint order-service POST /orders/{id}/coupons`, or just ask "add an endpoint to apply a coupon to an order" and let Claude load it. Start with the procedure you explain most often—that's usually the one with the highest payoff.
 
 ---
 
