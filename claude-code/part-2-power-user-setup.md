@@ -15,7 +15,7 @@ I've spent six-plus years on Java/Spring Boot and React/Angular, and more recent
 | [Part 1](/claude-code/part-1-getting-started) | Getting Started the Right Way |
 | **Part 2** | The Power-User Setup (this article) |
 | [Part 3](/claude-code/part-3-onboarding) | Onboarding a New Engineer |
-| Part 4 | Guardrails, Rollout, and Value (coming next) |
+| [Part 4](/claude-code/part-4-guardrails-and-value) | Guardrails, Rollout, and Value |
 
 ---
 

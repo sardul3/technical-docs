@@ -17,7 +17,7 @@ This is Part 1 of a four-part series. It covers getting started properly: instal
 | **Part 1** | Getting Started the Right Way (this article) |
 | [Part 2](/claude-code/part-2-power-user-setup) | The Power-User Setup |
 | [Part 3](/claude-code/part-3-onboarding) | Onboarding a New Engineer |
-| Part 4 | Guardrails, Rollout, and Value (coming next) |
+| [Part 4](/claude-code/part-4-guardrails-and-value) | Guardrails, Rollout, and Value |
 
 ---
 

@@ -21,7 +21,7 @@ The Claude Code features I rely on were checked against the official docs as of 
 | [Part 1](/claude-code/part-1-getting-started) | Getting Started the Right Way |
 | [Part 2](/claude-code/part-2-power-user-setup) | The Power-User Setup |
 | **Part 3** | Onboarding a New Engineer (this article) |
-| Part 4 | Guardrails, Rollout, and Value (coming next) |
+| [Part 4](/claude-code/part-4-guardrails-and-value) | Guardrails, Rollout, and Value |
 
 ---
 
@@ -637,4 +637,4 @@ Done right, Claude Code makes a new engineer's first ninety days faster. More im
 
 **Previous:** [Part 2: The Power-User Setup](/claude-code/part-2-power-user-setup)
 
-**Next:** Part 4: Guardrails, Rollout, and Value — Where AI coding agents shine, where they fail, and how to prove they're worth it.
+**Next:** [Part 4: Guardrails, Rollout, and Value](/claude-code/part-4-guardrails-and-value) — Where AI coding agents shine, where they fail, and how to prove they're worth it.
