@@ -19,10 +19,6 @@ This is Part 1 of a four-part series. It covers getting started properly: instal
 | Part 3 | Onboarding a New Engineer |
 | Part 4 | Guardrails, Rollout, and Value |
 
-::: warning ADD YOUR STORY
-The moment you realized Claude Code was useful on a legacy codebase and not just demos. One short paragraph.
-:::
-
 ---
 
 ## Install: Pick the Path That Updates Itself
@@ -387,11 +383,7 @@ The single highest-leverage habit: **give Claude a way to verify its own work**.
 
 > Write a failing test in `OrderServiceTest` that captures stacked coupons. Run it and show me it fails. Then implement the minimum change to pass. Then run the whole `order-service` module's tests. Don't modify existing tests without asking.
 
-That last sentence matters. Agents will "fix" a failing test by weakening the assertion if you let them.
-
-::: warning ADD YOUR STORY
-A time test-first prompting caught a wrong assumption the agent made.
-:::
+That last sentence matters. Agents will "fix" a failing test by weakening the assertion if you let them. Watch for this pattern: if a test suddenly passes without the implementation changing, check the assertion.
 
 ---
 
