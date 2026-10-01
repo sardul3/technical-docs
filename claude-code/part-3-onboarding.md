@@ -339,9 +339,7 @@ Rules: attribute every claim to the discussion. Do not add reasoning nobody stat
 Remove secrets, customer data, and anything that looks like a credential. Print the file path when done.
 ```
 
-::: warning ADD YOUR STORY
-A decision that lived only in someone's head until it was written down, and what it cost before it was.
-:::
+Look for decisions that keep coming up in code review or onboarding questions—those are the ones worth capturing first.
 
 ---
 
@@ -596,11 +594,9 @@ The agent's role should shrink from guide to tool as the engineer grows.
 
 ## 13. Measuring Onboarding
 
-::: warning ADD YOUR DATA
-Onboarding signals from a real cohort, before and after. Don't publish estimates.
-:::
+Track these signals to understand whether the onboarding kit is helping:
 
-| Signal | How I'd collect it |
+| Signal | How to Collect |
 |--------|-------------------|
 | Time to first merged PR | Git/PR history from start date |
 | Time to first non-doc PR | Same, excluding docs-only |
@@ -627,9 +623,7 @@ Onboarding signals from a real cohort, before and after. Don't publish estimates
 | **Privacy and data policy** | Question logs are opt-in and local; pasted threads get scrubbed; tracker access is read-only. Check your company's policies. |
 | **Mentor atrophy** | Seniors may assume "the agent has it covered." It doesn't. Put mentorship time on the calendar. |
 
-::: warning ADD YOUR STORY
-How this played out with a real new hire, and what you changed afterward.
-:::
+Expect to iterate. The first cohort will reveal which skills need refinement and which tour stops have rotted.
 
 ---
 
