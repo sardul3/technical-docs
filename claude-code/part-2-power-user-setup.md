@@ -14,8 +14,8 @@ I've spent six-plus years on Java/Spring Boot and React/Angular, and more recent
 |------|-------|
 | [Part 1](/claude-code/part-1-getting-started) | Getting Started the Right Way |
 | **Part 2** | The Power-User Setup (this article) |
-| Part 3 | Onboarding a New Engineer (coming next) |
-| Part 4 | Guardrails, Rollout, and Value |
+| [Part 3](/claude-code/part-3-onboarding) | Onboarding a New Engineer |
+| Part 4 | Guardrails, Rollout, and Value (coming next) |
 
 ---
 
@@ -434,4 +434,4 @@ Power-user setup isn't about collecting features. It's about moving repeatable k
 
 **Previous:** [Part 1: Getting Started the Right Way](/claude-code/part-1-getting-started)
 
-**Next:** Part 3: Onboarding a New Engineer — Using Claude Code to accelerate onboarding without replacing mentorship.
+**Next:** [Part 3: Onboarding a New Engineer](/claude-code/part-3-onboarding) — Using Claude Code to accelerate onboarding without replacing mentorship.
