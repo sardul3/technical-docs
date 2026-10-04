@@ -82,6 +82,12 @@ export default {
             { text: 'Neovim', link: '/others/neovim' },
             { text: 'SSH and Server Access', link: '/others/ssh-server-access' },
           ]
+        },
+        {
+          text: 'AI Engineering',
+          items: [
+            { text: 'Eval Framework', link: '/ai-engineering/eval-framework' },
+          ]
         }
       ],
       footer: {
