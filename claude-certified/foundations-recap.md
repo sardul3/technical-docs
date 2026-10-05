@@ -1,6 +1,6 @@
 # Recap: Five Takeaways
 
-This page summarizes the five key takeaways from the Foundations module. Keep these points in mind when you build with Claude.
+**For staff engineers**: These five points summarize the production-critical concepts from the Foundations module. They guide your decisions about cost estimation, testing strategy, and API pattern selection.
 
 ## 1. Tokens are the unit of input, output, and cost
 
@@ -16,9 +16,9 @@ The context window holds the whole request at once:
 - Tool definitions and results
 - Model output
 
-An oversized input errors before generation. Hitting the ceiling mid-generation returns truncated output with a `model_context_window_exceeded` stop reason.
+The API rejects an oversized input before generation. When output reaches the ceiling mid-generation, the API returns truncated output with a `model_context_window_exceeded` stop reason.
 
-Managing history is the application's job.
+Your application must manage history.
 
 ## 3. Sampling makes generation non-deterministic
 
@@ -33,10 +33,10 @@ Pick the smallest model and the simplest reasoning and prompting that meet your 
 These levers compose:
 
 - Model choice picks the family member
-- Reasoning mode is configured per request
+- You configure the reasoning mode per request
 - Prompting mode determines how many examples you include
 
-## 5. A developer reaches Claude over a REST API, usually through an SDK
+## 5. You reach Claude over a REST API, usually through an SDK
 
 Choose between synchronous, streaming, async/await, or batch based on:
 

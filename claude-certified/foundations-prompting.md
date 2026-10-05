@@ -1,10 +1,10 @@
 # Prompting Modes: Zero-Shot, One-Shot, Multi-Shot
 
-This page explains the three prompting modes. You will learn when to give examples and how many. Examples help the model produce the exact output shape you need.
+**For staff engineers**: The number of examples you include in a prompt affects both cost and output quality. Adding one or two correct examples often fixes output shape problems faster than adding more instructions. Balance token cost against reliability.
 
 ## The three modes
 
-Separate from how you word a prompt is how many worked examples you give the model inside it.
+You control how many worked examples you give the model inside the prompt.
 
 | Mode | Examples | Description |
 |------|----------|-------------|

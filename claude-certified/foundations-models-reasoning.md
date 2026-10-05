@@ -1,17 +1,17 @@
 # Model Options and Reasoning Modes
 
-This page explains the Claude model family and reasoning modes. You will learn how to choose a model and when to use reasoning. These are separate decisions that work together.
+**For staff engineers**: Model choice and reasoning mode are separate levers you can tune independently. This separation lets you optimize cost, latency, and quality per endpoint. Start with the simplest configuration that meets your eval and add capability only where needed.
 
 ## The Claude model family
 
 Claude is a family of models. It currently spans four tiers:
 
-| Tier | Description | When to use |
-|------|-------------|-------------|
-| **Fable** | Most capable tier | Demanding reasoning, long-horizon agentic work |
-| **Opus** | Complex work | Long-running agentic coding, enterprise work |
-| **Sonnet** | Balanced default | Most production workloads |
-| **Haiku** | Speed and cost | High-volume tasks that fit its capability |
+| Tier | Description |
+|------|-------------|
+| **Fable** | The most capable tier for the most demanding reasoning, coding, and agentic work |
+| **Opus** | Handles demanding work above the Sonnet envelope |
+| **Sonnet** | The balanced default for most production workloads |
+| **Haiku** | Built for speed and cost efficiency on tasks that fit its capability |
 
 Each tier has a different tradeoff across cost, latency, and capability.
 
@@ -33,7 +33,7 @@ The older `budget_tokens` control is deprecated. On the newest model generations
 
 ### Thinking content
 
-Thinking content is omitted from responses by default on the newest models. Request summarized display when you need to show it.
+The newest models omit thinking content from responses by default. Request summarized display when you need to show it.
 
 ### When reasoning helps
 
@@ -41,13 +41,11 @@ Reasoning earns its cost on hard, multi-step problems. It is wasted on lookups a
 
 ### Per-model defaults
 
-The two levers compose. Model choice picks the family member. Reasoning mode is configured per request.
-
 Per-model defaults differ. Some newest models think adaptively by default or always. Check the current thinking defaults for your model when you build.
 
 ## How the two work together
 
-Model choice and reasoning mode are independent. You can set each one separately.
+Model choice and reasoning mode are independent. You can set each one separately. Model choice picks the family member. You configure the reasoning mode per request.
 
 | Configuration | Behavior |
 |--------------|----------|

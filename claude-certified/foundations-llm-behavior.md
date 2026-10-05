@@ -1,6 +1,6 @@
 # How LLMs Behave
 
-This page explains the core behaviors of large language models. You will learn how Claude processes input, manages memory, and generates output. These concepts help you build reliable features.
+**For staff engineers**: Understanding tokens and the context window helps you estimate costs and prevent production failures. Sampling explains why the same prompt can return different text. Non-determinism changes how you test Claude features.
 
 ## Tokens: the unit of input, output, and cost
 
@@ -34,7 +34,7 @@ The context window is a fixed budget. It has two edge behaviors.
 
 ### Input too large
 
-A request whose input is larger than the window is rejected. The API returns a validation error before generation starts.
+The API rejects a request whose input is larger than the window. It returns a validation error before generation starts.
 
 ### Output reaches the ceiling
 
@@ -61,7 +61,7 @@ Because the choice is sampled, the same prompt run twice can return different wo
 
 Sampling controls are model-dependent. The newest Claude models do not accept non-default sampling parameters.
 
-Setting `temperature`, `top_p`, or `top_k` to a non-default value returns a 400 error on Claude Opus 4.7 and later models. This includes Claude Opus 5, Claude Sonnet 5, and Claude Fable 5. Behavior on these models is steered through prompting instead.
+Setting `temperature`, `top_p`, or `top_k` to a non-default value returns a 400 error on the newest models. On these models, you steer behavior with the prompt instead.
 
 Even on models that accept temperature, `temperature: 0` makes outputs more repeatable. It does not guarantee identical outputs across calls.
 

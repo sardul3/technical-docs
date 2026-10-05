@@ -1,10 +1,10 @@
 # The Technical Substrate
 
-This page explains how a developer reaches Claude. You will learn about the SDK, streaming, and async patterns. Choose the right pattern for your workload.
+**For staff engineers**: The SDK, streaming, and batch patterns solve different problems. Choose synchronous for simple backend jobs. Choose streaming when users watch output. Choose async for concurrency. Choose batch for bulk offline work at lower cost.
 
-## How a developer reaches Claude: SDK versus raw REST
+## How you reach Claude: SDK versus raw REST
 
-At its core, Claude is reached over an HTTP REST API. Your code sends a request to an endpoint with your API key and a JSON body. It reads a JSON response back.
+You reach Claude through an HTTP REST API. Your code sends a request to an endpoint with your API key and a JSON body. It reads a JSON response back.
 
 ### Raw REST
 
@@ -33,7 +33,7 @@ The SDK and raw REST reach the same API and the same model. The SDK saves you fr
 
 A **synchronous** request is the simplest pattern. You send the request. You wait for the complete response to come back in one piece. Then you act on it.
 
-Synchronous is fine for:
+Synchronous works well for:
 
 - Short responses
 - Backend jobs where no one is waiting

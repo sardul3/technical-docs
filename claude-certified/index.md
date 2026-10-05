@@ -1,10 +1,8 @@
 # Claude Certified Developer Course
 
+**For staff engineers**: These notes help you make informed production decisions about Claude. You will learn how tokens, context windows, and sampling affect cost and reliability. You will understand when to choose different models, reasoning modes, and API patterns.
+
 This section contains notes from Sagar Poudel's Claude Certified Developer course. The notes follow ASD-STE100 Simplified Technical English.
-
-## Why this matters
-
-Staff engineers who build with Claude need to understand how the model works. This knowledge helps you make good decisions about model choice, prompting, and API patterns. The Foundations module gives you the concepts you need before you write code.
 
 ## Course structure
 
