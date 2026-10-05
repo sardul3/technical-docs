@@ -21,6 +21,17 @@ export default {
       ],
       sidebar: [
         {
+          text: 'Claude Certified Developer',
+          items: [
+            { text: 'Course Overview', link: '/claude-certified/' },
+            { text: 'How LLMs Behave', link: '/claude-certified/foundations-llm-behavior' },
+            { text: 'Models and Reasoning', link: '/claude-certified/foundations-models-reasoning' },
+            { text: 'Prompting Modes', link: '/claude-certified/foundations-prompting' },
+            { text: 'Technical Substrate', link: '/claude-certified/foundations-technical-substrate' },
+            { text: 'Recap: Five Takeaways', link: '/claude-certified/foundations-recap' },
+          ]
+        },
+        {
           text: 'Bootcamp',
           items: [
             { text: 'Intro to API', link: '/boot-camp/intro-to-api' },
